@@ -1,1 +1,17 @@
-/home/jarda/git/research/thesis_afm_code/pyproject.toml
+[tool.poetry]
+name = "afm-simulations"
+version = "1.0.0"
+description = "Code used in PhD thesis Exploring Statistical Biases in Educational Data: A~Simulation-Based Approach."
+authors = ["Jaroslav Čechák <xcechak1@fi.muni.cz>"]
+readme = "README.md"
+packages = [{include = "afm"}, {include = "simulations"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.mypy]
+python_version = "3.10"
