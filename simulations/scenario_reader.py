@@ -37,7 +37,7 @@ DISTRIBUTIONS = {
 Learning modes
 """
 
-NO_LEARNING = {
+NO_LEARNING: dict[str, list[str]] = {
     "state_updater_after_item_chain": [],
 }
 
