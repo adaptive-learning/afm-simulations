@@ -39,7 +39,10 @@ class AFM(Model):
             if max_learning_opportunities is not None
             else q_matrix.sum(axis=0)
         )
-        assert q_matrix.shape == (num_items, num_knowledge_components,), (
+        assert q_matrix.shape == (
+            num_items,
+            num_knowledge_components,
+        ), (
             f"Shape of Q matrix {q_matrix.shape} does not match number of items {num_items} "
             f"times number of knowledge components {num_knowledge_components}"
         )

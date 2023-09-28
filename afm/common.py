@@ -410,7 +410,6 @@ def fit_afm_on_simulated_data_fold(
     fit_betas: bool = True,
     fit_gammas: bool = True,
 ) -> tuple[float, float, np.ndarray, AFM]:
-
     afm = AFM.get_model(
         num_students=num_students,
         num_items=num_items,
