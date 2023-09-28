@@ -250,6 +250,6 @@ class ScenarioReader:
             if key not in modified:
                 modified[key] = value
             else:
-                assert type(value) == list, "Dictionaries contain contradicting keys"
+                assert isinstance(value, list), "Dictionaries contain contradicting keys"
                 modified[key] = deepcopy(modified[key]) + value
         return modified
