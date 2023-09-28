@@ -3,7 +3,7 @@ import os
 import random
 from copy import deepcopy
 from math import log
-from typing import Any, Optional, Union, Sequence
+from typing import Any, Optional, Sequence, Union
 
 import matplotlib
 import matplotlib.pyplot as plt

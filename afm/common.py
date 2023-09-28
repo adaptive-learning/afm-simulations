@@ -112,9 +112,9 @@ def load_fold(
     ).round(1)
 
     names = (
-            [f"alpha{i}" for i in range(true_alphas.shape[0])]
-            + [f"beta{i}" for i in range(true_betas.shape[0])]
-            + [f"gamma{i}" for i in range(true_gammas.shape[0])]
+        [f"alpha{i}" for i in range(true_alphas.shape[0])]
+        + [f"beta{i}" for i in range(true_betas.shape[0])]
+        + [f"gamma{i}" for i in range(true_gammas.shape[0])]
     )
     values = np.hstack((true_alphas, true_betas, true_gammas))
     true_params = pd.DataFrame({"name": names, "true_value": values})

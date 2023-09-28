@@ -39,10 +39,10 @@ class AFM(Model):
             if max_learning_opportunities is not None
             else q_matrix.sum(axis=0)
         )
-        assert q_matrix.shape == (
-            num_items,
-            num_knowledge_components,
-        ), (f"Shape of Q matrix {q_matrix.shape} does not match number of items {num_items} times number of knowledge components {num_knowledge_components}")
+        assert q_matrix.shape == (num_items, num_knowledge_components,), (
+            f"Shape of Q matrix {q_matrix.shape} does not match number of items {num_items} "
+            f"times number of knowledge components {num_knowledge_components}"
+        )
 
         self.q_matrix = tf.constant(value=q_matrix, name="q_matrix", dtype=tf.float32)
 
@@ -104,7 +104,8 @@ class AFM(Model):
         tasks_easiness = tf.reduce_sum(qs * self.betas, axis=1, name="tasks_easiness")
 
         # learning opportunities normalization described in paper
-        # T. Effenberger, R. Pelanek, and J. Cechak. Exploration of the robustness and generalizability of the additive factors model.
+        # T. Effenberger, R. Pelanek, and J. Cechak.
+        # Exploration of the robustness and generalizability of the additive factors model.
         gammas_prime = self.gammas * self.max_learning_opportunities
         normalized_learning_opportunities = (
             learning_opportunities / self.max_learning_opportunities
