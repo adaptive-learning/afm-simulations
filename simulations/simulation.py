@@ -3,14 +3,15 @@ import os
 import random
 from copy import deepcopy
 from math import log
-from typing import Any, Optional, Sequence, Union
+from pathlib import Path
+from typing import Any, Callable, Optional, Sequence, Union
 
 import matplotlib
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-import seaborn as sns
-from scipy.stats import spearmanr
+import seaborn as sns  # type: ignore
+from scipy.stats import spearmanr  # type: ignore
 from tqdm import tqdm
 
 matplotlib.use("agg")
@@ -19,16 +20,26 @@ SETTING = dict[str, Any]
 
 
 class Item:
-    def __init__(self, id: int, concepts: list[int]) -> None:
-        self.id = id
+    def __init__(self, item_id: int, concepts: np.ndarray) -> None:
+        self.id = item_id
         self.concepts = concepts
+        self.estimated_b: float = 0
+        self.a: float = 0
+        self.b: float = 0
 
 
 class Student:
-    def __init__(self, id: int, skill: float, opportunities: list[int]) -> None:
-        self.id = id
+    def __init__(
+        self, student_id: int, skill: float, opportunities: np.ndarray
+    ) -> None:
+        self.id = student_id
         self.skill = skill
         self.opportunities = opportunities
+        self.cheating = False
+        self.is_cheater = False
+        self.items_left_when_starts_cheating = 0
+        self.solved_items = 0
+        self.has_learned = False
 
 
 class Simulation:
@@ -41,7 +52,7 @@ class Simulation:
         self.available_items: list[Item] = []
         self.active_student: Optional[Student] = None
         self.active_item: Optional[Item] = None
-        self.item_order = None
+        self.item_order: Any = None
         self.remaining_solve_time: Optional[float] = None
         self.solve_time: Optional[float] = None
         self.log: Optional[Union[pd.DataFrame, np.ndarray]] = None
@@ -80,7 +91,7 @@ class Simulation:
 
         :param chain: Sequence of method names
         """
-        result = []
+        result: Any = []
         for method_name in chain:
             result = getattr(self, method_name)(result)
         return result
@@ -90,7 +101,7 @@ class Simulation:
         random.seed(self.setting["seed"])
         np.random.seed(self.setting["seed"])
 
-    def run(self):
+    def run(self) -> None:
         """Main simulation code"""
         # initialize
         self.initializer()
@@ -124,7 +135,11 @@ class Simulation:
         self.log.student_id = self.log.student_id.astype(int)
         self.log.item_id = self.log.item_id.astype(int)
 
-    def plot_attempts_heatmap(self):
+    def plot_attempts_heatmap(self) -> None:
+        """
+        Plot answer correctness as heatmap (students X items)
+        """
+        assert isinstance(self.log, pd.DataFrame)
         pivoted_log = self.log[["student_id", "item_id", "solved"]].pivot(
             index="student_id", columns="item_id"
         )
@@ -138,7 +153,11 @@ class Simulation:
         plt.show()
         plt.clf()
 
-    def plot_item_success_rates(self):
+    def plot_item_success_rates(self) -> None:
+        """
+        Plot item success rates as bar plot
+        """
+        assert isinstance(self.log, pd.DataFrame)
         ax = self.log.groupby("item_id")["solved"].mean().plot(kind="bar")
         ax.set_ylabel("Item success rate")
         ax.set_title(f"Item success rate -- {self.scenario_name}")
@@ -146,7 +165,13 @@ class Simulation:
         plt.show()
         plt.clf()
 
-    def update_log(self):
+    def update_log(self) -> None:
+        """
+        Update log after simulated student answer
+        """
+        assert self.log is not None
+        assert self.active_student is not None
+        assert self.active_item is not None
         # either one of solve time and solved have to be a valid simulation value
         should_log = self.solved is not None or self.solve_time is not None
         if should_log:
@@ -159,13 +184,27 @@ class Simulation:
             ]
             self.log_id += 1
 
-    def export_q_matrix(self, path):
+    def export_q_matrix(self, path: Union[str, Path]) -> None:
+        """
+        Save Q-matrix used in simulation as CSV file
+
+        :param path: Path to a file that will contain stored Q-matrix
+        """
+        assert self.q_matrix is not None
         columns = tuple("c{}".format(i) for i in range(self.q_matrix.shape[1]))
         q_matrix = pd.DataFrame(self.q_matrix, columns=columns)
         q_matrix = q_matrix.reset_index().rename(columns={"index": "item_id"})
         q_matrix.to_csv(path, index=False)
 
-    def export_params(self, path):
+    def export_params(self, path: Union[str, Path]) -> None:
+        """
+        Export AFM parameters as CSV file
+
+        :param path: Path to a file that will contain stored AFM parameters
+        """
+        assert self.alpha is not None
+        assert self.beta is not None
+        assert self.gamma is not None
         names = (
             ["alpha{}".format(i) for i in range(self.alpha.shape[0])]
             + ["beta{}".format(i) for i in range(self.beta.shape[0])]
@@ -175,7 +214,14 @@ class Simulation:
         params = pd.DataFrame({"name": names, "value": values})
         params.to_csv(path, index=False)
 
-    def export_afm_simulation(self):
+    def export_afm_simulation(self) -> None:
+        """
+        Export result of simulation with AFM model
+
+        This exports simulated log file as well as Q-matrix, AFM parameters,
+        and simulation settings.
+        """
+        assert isinstance(self.log, pd.DataFrame)
         base_path = f"data/{self.scenario_name}/"
         if not os.path.exists(base_path):
             os.makedirs(base_path)
@@ -191,18 +237,25 @@ class Simulation:
     Initializer
     """
 
-    def initializer(self):
+    def initializer(self) -> None:
+        """
+        Initialize simulation state at the beginning
+        """
         # Default stuff
         self._set_seed()
 
-        student_count = self.setting["student_count"]
-        item_count = self.setting["item_count"]
+        student_count: int = self.setting["student_count"]
+        item_count: int = self.setting["item_count"]
         self.q_matrix = np.array(self.setting["q_matrix"])
-        concept_count = self.q_matrix.shape[1]
+        concept_count: int = self.q_matrix.shape[1]
 
-        alpha_distribution = self.setting["alpha_distribution"]
-        beta_distribution = self.setting["beta_distribution"]
-        gamma_distribution = self.setting["gamma_distribution"]
+        alpha_distribution: Callable[..., np.ndarray] = self.setting[
+            "alpha_distribution"
+        ]
+        beta_distribution: Callable[..., np.ndarray] = self.setting["beta_distribution"]
+        gamma_distribution: Callable[..., np.ndarray] = self.setting[
+            "gamma_distribution"
+        ]
 
         self._set_seed()
         self.beta = beta_distribution(
@@ -219,13 +272,13 @@ class Simulation:
         )
 
         self.students = [
-            Student(id, skill, np.full(concept_count, 0))
-            for id, skill in enumerate(self.alpha)
+            Student(student_id, skill, np.full(concept_count, 0))
+            for student_id, skill in enumerate(self.alpha)
         ]
 
         self.items = [
-            Item(id, concept_mapping)
-            for id, concept_mapping in enumerate(self.q_matrix)
+            Item(item_id, concept_mapping)
+            for item_id, concept_mapping in enumerate(self.q_matrix)
         ]
 
         # for debug
@@ -243,7 +296,13 @@ class Simulation:
         # other extensions for different scenarios
         self._chain_executor(self.setting.get("initializer_chain", ()))
 
-    def create_fixed_scramble(self):
+    def create_fixed_scramble(self) -> None:
+        """
+        Randomly shuffle item ordering
+
+        It is intended to simulate student solving items in the same order,
+        but the order is random.
+        """
         self.item_order = [i for i in range(len(self.items))]
         random.shuffle(self.item_order)
 
@@ -251,37 +310,70 @@ class Simulation:
     Initializer before student
     """
 
-    def initializer_before_student(self):
+    def initializer_before_student(self) -> None:
+        """
+        Initialize simulation state before new students starts solving
+        """
         self.available_items = self.items[:]
-        self.item_order = 1
+        self.item_order = 1  # type: ignore
         self._chain_executor(self.setting.get("initializer_before_student_chain", ()))
 
-    def scramble_and_sort(self):
+    def scramble_and_sort(self) -> None:
+        """
+        Order items base on their estimated difficulty
+
+        There is a random shuffle step to break ties (especially in
+        the beginning where all estimates are the same).
+        """
         random.shuffle(self.available_items)
         self.available_items = sorted(
             self.available_items, key=lambda item: item.estimated_b
         )
 
-    def epsilon(self):
+    def epsilon(self) -> None:
+        """
+        Randomly reorder items for the active student with some probability
+        """
+        assert self.active_student is not None
         if random.random() < self.setting["epsilon"]:
             random.shuffle(self.available_items)
             self.random_students_id.append(self.active_student.id)
 
-    def fixed_scramble(self):
+    def fixed_scramble(self) -> None:
+        """
+        Order items based on predefined fix item order
+        """
+        assert self.available_items is not None
+        assert self.item_order is not None
         self.available_items.sort(key=lambda item: self.item_order[item.id])
 
-    def set_remaining_time(self):
+    def set_remaining_time(self) -> None:
+        """
+        Update remaining student solving time
+        """
         self.remaining_solve_time = self.setting["remaining_solve_time"](
-            self.true_b["true_b"]
+            self.true_b["true_b"]  # type: ignore
         )
 
-    def set_remaining_items(self):
+    def set_remaining_items(self) -> None:
+        """
+        Initialize number of item student can solve
+        """
         self.remaining_items = self.setting["max_items"]
 
-    def initialize_streak(self):
+    def initialize_streak(self) -> None:
+        """
+        Initialize streak counter
+
+        A streak count is the number of consecutively successfully solved items.
+        """
         self.streak = 0
 
-    def initialize_cheater(self):
+    def initialize_cheater(self) -> None:
+        """
+        Randomly assign student to a cheating group
+        """
+        assert self.active_student is not None
         # is student cheating right now
         self.active_student.cheating = False
         # set if student will eventually cheat
@@ -310,20 +402,54 @@ class Simulation:
     """
 
     def practice_terminator(self):
+        """
+        Determine if current student should stop solving items
+
+        There can be multiple reasons to stop solving from no unsolved items
+        left to expended solving time budget.
+        """
         return self._chain_executor_cumulative(
             self.setting.get("practice_terminator_chain", ())
         )
 
-    def available_item(self, *args):
+    def available_item(self, *args) -> bool:
+        """
+        Check if the student should stop due to no unsolved items left
+
+        :return: True if there are any unsolved items left and False otherwise
+        """
         return len(self.available_items) > 0
 
-    def attrition_termination(self, result):
+    def attrition_termination(self, result: bool) -> bool:
+        """
+        Check if the student should stop due to no remaining solving time left
+
+        :param result: Results of previous checks
+        :return: True if there is any remaining solving time left and previous
+                 conditions are also satisfied and False otherwise
+        """
+        assert self.remaining_solve_time is not None
         return result and self.remaining_solve_time > 0
 
-    def mastery_termination(self, result):
+    def mastery_termination(self, result: bool) -> bool:
+        """
+        Check if the student should stop due to achieving mastery
+
+        :param result: Results of previous checks
+        :return: True if there is any remaining solving tim e left and
+                 previous conditions are also satisfied and False otherwise
+        """
         return result and self.streak < self.setting["mastery_streak"]
 
-    def max_items_terminator(self, result):
+    def max_items_terminator(self, result: bool) -> bool:
+        """
+        Check if the student should stop due to solving predefined number of items
+
+        :param result: Results of previous checks
+        :return: True if student can still solve some items and previous
+                 conditions are also satisfied and False otherwise
+        """
+        assert self.remaining_items is not None
         return result and self.remaining_items > 0
 
     """
@@ -350,8 +476,7 @@ class Simulation:
 
     def first_item_random_skip(self, *args):
         while (
-            np.random.random() < self.setting["skip_probability"]
-            and self.available_items
+            np.random.rand() < self.setting["skip_probability"] and self.available_items
         ):
             self.available_items.pop(0)
         if not self.available_items:
@@ -366,10 +491,12 @@ class Simulation:
         self._chain_executor(self.setting.get("item_solver_chain", ()))
 
     def log_time_model(self):
+        assert self.active_student is not None
+        assert self.active_item is not None
         student = self.active_student
         item = self.active_item
 
-        self.solve_time = item.b + item.a * student.skill + np.random.normal(0, 1)
+        self.solve_time = item.b + item.a * student.skill + np.random.normal(0, 1)  # type: ignore
         student.solved_items += 1
 
     @staticmethod
@@ -380,10 +507,14 @@ class Simulation:
     def afm(self):
         p = self.afm_prob()
         if "afm_noise_std" in self.setting:
-            p += np.random.normal(0, self.setting["afm_noise_std"])
+            p += np.random.normal(0, self.setting["afm_noise_std"])  # type: ignore
         self.solved = np.random.rand() <= p
 
     def afm_prob(self):
+        assert self.active_student is not None
+        assert self.active_item is not None
+        assert self.beta is not None
+        assert self.gamma is not None
         student = self.active_student
         item = self.active_item
         p = self._f(
@@ -399,6 +530,10 @@ class Simulation:
         self.solved = np.random.rand() <= p
 
     def cfm_prob(self):
+        assert self.active_student is not None
+        assert self.active_item is not None
+        assert self.beta is not None
+        assert self.gamma is not None
         student = self.active_student
         item = self.active_item
         # compute exponents
@@ -413,6 +548,10 @@ class Simulation:
         return p
 
     def afm_time(self):
+        assert self.active_student is not None
+        assert self.active_item is not None
+        assert self.beta is not None
+        assert self.gamma is not None
         student = self.active_student
         item = self.active_item
 
@@ -424,22 +563,30 @@ class Simulation:
         self.solved = True
 
     def attrition(self):
+        assert self.remaining_solve_time is not None
+        assert self.solve_time is not None
         self.remaining_solve_time -= self.solve_time
         if self.remaining_solve_time < 0:
             self.solved = None
             self.solve_time = None
 
     def mastery(self):
+        assert self.streak is not None
+        assert self.solved is not None
         self.streak = self.streak + 1 if self.solved else 0
 
     def early_stopping(self):
+        assert self.remaining_items is not None
         self.remaining_items -= 1
 
     def cheating(self):
+        assert self.active_student is not None
         if self.active_student.cheating:
             self.solved = True
 
     def cheating_compromised_items(self):
+        assert self.active_student is not None
+        assert self.active_item is not None
         if self.active_student.cheating and (
             self.active_item.id in self.setting["compromised_items"]
         ):
@@ -456,23 +603,27 @@ class Simulation:
         self._chain_executor(self.setting.get("state_updater_after_item_chain", ()))
 
     def learning_opportunities(self):
+        assert self.active_student is not None
+        assert self.active_item is not None
         self.active_student.opportunities += self.active_item.concepts
 
     def constant_learning(self):
+        assert self.active_student is not None
         # skill from -3 to 3
         max_gain = self.setting["max_gain"]
         self.active_student.skill += max_gain / len(self.items)
 
     def step_learning(self):
-        if (
-            not hasattr(self.active_student, "has_learned")
-            and random.random() < self.setting["learn_prob"]
-        ):
+        assert self.active_student is not None
+        if (not self.active_student.has_learned) and random.random() < self.setting[
+            "learn_prob"
+        ]:
             max_gain = self.setting["max_gain"]
             self.active_student.skill += max_gain
             self.active_student.has_learned = True
 
     def steep_learning(self):
+        assert self.active_student is not None
         max_gain = self.setting["max_gain"]
         if self.active_student.skill < max_gain:
             base = self.setting["learning_period"]
@@ -483,6 +634,8 @@ class Simulation:
                 self.active_student.skill += skill_increment
 
     def switch_cheater_state(self):
+        assert self.active_student is not None
+        assert self.available_items is not None
         if (
             self.active_student.is_cheater
             and self.active_student.items_left_when_starts_cheating
@@ -506,14 +659,18 @@ class Simulation:
         self._chain_executor(self.setting.get("state_updater_after_student_chain", ()))
 
     def update_b_estimates(self):
+        assert self.active_student is not None
         if (self.active_student.id + 1) % self.setting["adaptation_after"] == 0:
             self._update_b_estimates()
 
     def update_b_estimates_once(self):
+        assert self.active_student is not None
         if (self.active_student.id + 1) == self.setting["first_k"]:
             self._update_b_estimates()
 
     def update_b_estimates_epsilon(self):
+        assert self.active_student is not None
+        assert self.random_students_id is not None
         if self.active_student.id in self.random_students_id:
             df = pd.DataFrame(
                 data=self.log,
@@ -549,9 +706,10 @@ class Simulation:
             item.estimated_b = estimate
 
     def get_true_difficulty_params(self):
-        return self.true_b["true_b"].mean(), self.true_b["true_b"].std()
+        return self.true_b["true_b"].mean(), self.true_b["true_b"].std()  # type: ignore
 
     def get_estimated_difficulty_params(self):
+        assert isinstance(self.log, pd.DataFrame)
         estimated_difficulty_params = self.log.groupby("item_id")[
             "solve_time"
         ].describe()["mean"]
