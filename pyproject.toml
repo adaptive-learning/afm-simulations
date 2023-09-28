@@ -13,5 +13,9 @@ python = "^3.10"
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
+[tool.flake8]
+max-line-length = 120
+
 [tool.mypy]
 python_version = "3.10"
+check_untyped_defs = "true"
