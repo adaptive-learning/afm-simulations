@@ -412,7 +412,7 @@ class Simulation:
             self.setting.get("practice_terminator_chain", ())
         )
 
-    def available_item(self, *args) -> bool:
+    def available_item(self, *args: Any) -> bool:
         """
         Check if the student should stop due to no unsolved items left
 
@@ -456,25 +456,32 @@ class Simulation:
     Item selector
     """
 
-    def item_selector(self):
+    def item_selector(self) -> Item:
+        """
+        Select the next item for student to solve
+        """
         self.active_item = self._chain_executor_cumulative(
             self.setting.get("item_selector_chain", ())
         )
+        assert self.active_item is not None
         return self.active_item
 
-    def first_item(self, *args):
+    def first_item(self, *args: Any) -> Item:
+        assert self.available_items is not None
         return self.available_items.pop(0)
 
-    def random_item(self, *args):
+    def random_item(self, *args: Any) -> Item:
+        assert self.available_items is not None
         return self.available_items.pop(
             random.randint(0, len(self.available_items) - 1)
         )
 
-    def random_from_window(self, *args):
+    def random_from_window(self, *args: Any) -> Item:
+        assert self.available_items is not None
         window_size = min(self.setting["k"], len(self.available_items))
         return self.available_items.pop(random.randint(0, window_size - 1))
 
-    def first_item_random_skip(self, *args):
+    def first_item_random_skip(self, *args: Any) -> Optional[Item]:
         while (
             np.random.rand() < self.setting["skip_probability"] and self.available_items
         ):
@@ -487,10 +494,17 @@ class Simulation:
     Item solver
     """
 
-    def item_solver(self):
+    def item_solver(self) -> None:
+        """Simulate a student solving an item"""
         self._chain_executor(self.setting.get("item_solver_chain", ()))
 
-    def log_time_model(self):
+    def log_time_model(self) -> None:
+        """
+        Simulate student answer using Log time model
+
+        The student is assumed to always solve the item and the response
+        time is modeled using a variation of IRT model.
+        """
         assert self.active_student is not None
         assert self.active_item is not None
         student = self.active_student
@@ -500,17 +514,19 @@ class Simulation:
         student.solved_items += 1
 
     @staticmethod
-    def _f(x):
+    def _f(x: Any) -> Any:
+        """Logistic sigmoid function"""
         return 1 / (1 + np.exp(-x))
-        # return x
 
-    def afm(self):
+    def afm(self) -> None:
+        """Simulate student answer using AFM"""
         p = self.afm_prob()
         if "afm_noise_std" in self.setting:
             p += np.random.normal(0, self.setting["afm_noise_std"])  # type: ignore
-        self.solved = np.random.rand() <= p
+        self.solved = np.random.rand() <= p  # type: ignore
 
-    def afm_prob(self):
+    def afm_prob(self) -> float:
+        """Compute correct answer probability using AFM formula"""
         assert self.active_student is not None
         assert self.active_item is not None
         assert self.beta is not None
@@ -524,12 +540,19 @@ class Simulation:
         )
         return p
 
-    def cfm(self):
+    def cfm(self) -> None:
+        """
+        Simulate student answer using CFM
+
+        CFM is a variation of AFM where the concepts are modeled as
+        conjunctive instead of additive.
+        """
         p = self.cfm_prob()
 
-        self.solved = np.random.rand() <= p
+        self.solved = np.random.rand() <= p  # type: ignore
 
-    def cfm_prob(self):
+    def cfm_prob(self) -> float:
+        """Compute correct answer probability using CFM formula"""
         assert self.active_student is not None
         assert self.active_item is not None
         assert self.beta is not None
@@ -547,7 +570,8 @@ class Simulation:
         p = np.prod(np.apply_along_axis(self._f, 0, xs))
         return p
 
-    def afm_time(self):
+    def afm_time(self) -> None:
+        """Simulate student response time using AFM-inspired formula"""
         assert self.active_student is not None
         assert self.active_item is not None
         assert self.beta is not None
@@ -562,7 +586,8 @@ class Simulation:
         )
         self.solved = True
 
-    def attrition(self):
+    def attrition(self) -> None:
+        """Modify the state if a student has stopped solving due to attrition"""
         assert self.remaining_solve_time is not None
         assert self.solve_time is not None
         self.remaining_solve_time -= self.solve_time
@@ -570,21 +595,25 @@ class Simulation:
             self.solved = None
             self.solve_time = None
 
-    def mastery(self):
+    def mastery(self) -> None:
+        """Update streak counter"""
         assert self.streak is not None
         assert self.solved is not None
         self.streak = self.streak + 1 if self.solved else 0
 
-    def early_stopping(self):
+    def early_stopping(self) -> None:
+        """Reduce counter of items a student will solve"""
         assert self.remaining_items is not None
         self.remaining_items -= 1
 
-    def cheating(self):
+    def cheating(self) -> None:
+        """Modify the state if a student was cheating"""
         assert self.active_student is not None
         if self.active_student.cheating:
             self.solved = True
 
-    def cheating_compromised_items(self):
+    def cheating_compromised_items(self) -> None:
+        """Modify the state if a student was cheating"""
         assert self.active_student is not None
         assert self.active_item is not None
         if self.active_student.cheating and (
@@ -596,24 +625,28 @@ class Simulation:
     State updater after item
     """
 
-    def state_updater_after_item(self):
+    def state_updater_after_item(self) -> None:
+        """Update simulation state after a simulated student response"""
         self.item_order += 1
         self.solved = None
         self.solve_time = None
         self._chain_executor(self.setting.get("state_updater_after_item_chain", ()))
 
-    def learning_opportunities(self):
+    def learning_opportunities(self) -> None:
+        """Update learning opportunities counter"""
         assert self.active_student is not None
         assert self.active_item is not None
         self.active_student.opportunities += self.active_item.concepts
 
-    def constant_learning(self):
+    def constant_learning(self) -> None:
+        """Update student skill"""
         assert self.active_student is not None
         # skill from -3 to 3
         max_gain = self.setting["max_gain"]
         self.active_student.skill += max_gain / len(self.items)
 
-    def step_learning(self):
+    def step_learning(self) -> None:
+        """Update student skill"""
         assert self.active_student is not None
         if (not self.active_student.has_learned) and random.random() < self.setting[
             "learn_prob"
@@ -622,7 +655,8 @@ class Simulation:
             self.active_student.skill += max_gain
             self.active_student.has_learned = True
 
-    def steep_learning(self):
+    def steep_learning(self) -> None:
+        """Update student skill"""
         assert self.active_student is not None
         max_gain = self.setting["max_gain"]
         if self.active_student.skill < max_gain:
@@ -633,7 +667,8 @@ class Simulation:
                 )
                 self.active_student.skill += skill_increment
 
-    def switch_cheater_state(self):
+    def switch_cheater_state(self) -> None:
+        """Update student cheating state"""
         assert self.active_student is not None
         assert self.available_items is not None
         if (
@@ -655,20 +690,24 @@ class Simulation:
     State updater after student
     """
 
-    def state_updater_after_student(self):
+    def state_updater_after_student(self) -> None:
+        """Update simulation state after a student has responded to all items"""
         self._chain_executor(self.setting.get("state_updater_after_student_chain", ()))
 
-    def update_b_estimates(self):
+    def update_b_estimates(self) -> None:
+        """Update item difficulty estimate"""
         assert self.active_student is not None
         if (self.active_student.id + 1) % self.setting["adaptation_after"] == 0:
             self._update_b_estimates()
 
-    def update_b_estimates_once(self):
+    def update_b_estimates_once(self) -> None:
+        """Update item difficulty estimate"""
         assert self.active_student is not None
         if (self.active_student.id + 1) == self.setting["first_k"]:
             self._update_b_estimates()
 
-    def update_b_estimates_epsilon(self):
+    def update_b_estimates_epsilon(self) -> None:
+        """Update item difficulty estimate"""
         assert self.active_student is not None
         assert self.random_students_id is not None
         if self.active_student.id in self.random_students_id:
@@ -686,7 +725,8 @@ class Simulation:
             )
             self._update_b_estimates(df[df.student_id.isin(self.random_students_id)])
 
-    def _update_b_estimates(self, df=None):
+    def _update_b_estimates(self, df: Optional[pd.DataFrame] = None) -> None:
+        """Update item difficulty estimate"""
         if df is None:
             df = pd.DataFrame(
                 data=self.log,
@@ -705,10 +745,10 @@ class Simulation:
         ):
             item.estimated_b = estimate
 
-    def get_true_difficulty_params(self):
+    def get_true_difficulty_params(self) -> tuple[float, float]:
         return self.true_b["true_b"].mean(), self.true_b["true_b"].std()  # type: ignore
 
-    def get_estimated_difficulty_params(self):
+    def get_estimated_difficulty_params(self) -> tuple[float, float]:
         assert isinstance(self.log, pd.DataFrame)
         estimated_difficulty_params = self.log.groupby("item_id")[
             "solve_time"
@@ -717,8 +757,13 @@ class Simulation:
 
 
 def plot_mean_times(
-    full_log, scenarios, title="Estimated item difficulties", colors=None, path=None
-):
+    full_log: pd.DataFrame,
+    scenarios: Sequence[str],
+    title: str = "Estimated item difficulties",
+    colors: Optional[list[int]] = None,
+    path: Optional[Union[str, Path]] = None,
+) -> None:
+    """Plot estimated and true item difficulties as line plots"""
     assert scenarios
     if colors is not None:
         palette = [sns.color_palette("Paired", 12)[color] for color in colors]
