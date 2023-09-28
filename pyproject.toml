@@ -18,6 +18,9 @@ flake8 = "^6.1.0"
 flake8-pyproject = "^1.2.3"
 invoke = "^2.2.0"
 data-science-types = "^0.2.23"
+types-tqdm = "^4.66.0.2"
+types-tensorflow = "^2.12.0.7"
+pandas-stubs = "^2.0.3.230814"
 
 [build-system]
 requires = ["poetry-core"]
