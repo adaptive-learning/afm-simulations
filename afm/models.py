@@ -25,7 +25,7 @@ class AFM(Model):
         fit_betas: bool = True,
         fit_gammas: bool = True,
         alpha_regularizer: Regularizer = l2(l2=0.01),
-    ):
+    ) -> None:
         super().__init__()
         self.num_students = num_students
         self.num_items = num_items
@@ -50,7 +50,7 @@ class AFM(Model):
         self.q_matrix = tf.constant(value=q_matrix, name="q_matrix", dtype=tf.float32)
 
         self.alphas = tf.Variable(
-            initial_value=init_alphas
+            initial_value=init_alphas  # type: ignore
             if init_alphas is not None
             else np.zeros(self.num_students),
             name="alphas",
@@ -58,7 +58,7 @@ class AFM(Model):
             trainable=fit_alphas,
         )
         self.betas = tf.Variable(
-            initial_value=init_betas
+            initial_value=init_betas  # type: ignore
             if init_betas is not None
             else np.zeros(self.num_knowledge_components),
             name="betas",
@@ -66,7 +66,7 @@ class AFM(Model):
             trainable=fit_betas,
         )
         self.gammas = tf.Variable(
-            initial_value=init_gammas
+            initial_value=init_gammas  # type: ignore
             if init_gammas is not None
             else np.zeros(self.num_knowledge_components),
             name="gammas",
@@ -201,9 +201,9 @@ class AFM(Model):
         if cache_dir:
             # compute hash of inputs
             hasher = sha256()
-            hasher.update(student_ids)
-            hasher.update(item_ids)
-            hasher.update(np.ascontiguousarray(q_matrix))
+            hasher.update(student_ids.data)
+            hasher.update(item_ids.data)
+            hasher.update(np.ascontiguousarray(q_matrix).data)
             checksum = hasher.hexdigest()
 
             # check for exiting cached file
@@ -211,6 +211,7 @@ class AFM(Model):
             if cache_file_path.exists():
                 print("Found cached opportunities files!")
                 opportunities = np.load(cache_file_path)
+                assert isinstance(opportunities, np.ndarray)
                 return opportunities
 
         # initialize variables
@@ -237,7 +238,7 @@ class AFM(Model):
         if cache_dir:
             path = Path(cache_dir)
             path.mkdir(parents=True, exist_ok=True)
-            checksum = sha256(np.array([student_ids, item_ids])).hexdigest()
+            checksum = sha256(np.array([student_ids, item_ids]).data).hexdigest()
             np.save(path / f"{checksum}.npy", opportunities)
         return opportunities
 
@@ -256,7 +257,7 @@ class AFM(Model):
         fit_betas: bool = True,
         fit_gammas: bool = True,
         alpha_penalty: float = 0.01,
-    ):
+    ) -> "AFM":
         """
         Factory method for initialized AFM model
 
@@ -317,7 +318,7 @@ class AFM(Model):
             optimizer=optimizer,
             loss=loss_object,
             metrics=[
-                tf.keras.metrics.RootMeanSquaredError(),
+                tf.keras.metrics.RootMeanSquaredError(),  # type: ignore
             ],
         )
 
@@ -330,9 +331,9 @@ class AFM(Model):
         :param path: Path to store exported values
         """
         names = (
-            [f"alpha{i}" for i in range(self.alphas.shape[0])]
-            + [f"beta{i}" for i in range(self.betas.shape[0])]
-            + [f"gamma{i}" for i in range(self.gammas.shape[0])]
+            [f"alpha{i}" for i in range(len(self.alphas))]
+            + [f"beta{i}" for i in range(len(self.betas))]
+            + [f"gamma{i}" for i in range(len(self.gammas))]
         )
         values = np.hstack(
             (self.alphas.numpy(), self.betas.numpy(), self.gammas.numpy())
