@@ -1,0 +1,111 @@
+{
+  "general": {
+    "model": "afm",
+    "order": "random order",
+    "learning": "opportunities",
+    "student_count": 5000,
+    "item_count": 20,
+    "seed": 42,
+    "attrition": false,
+    "mastery": false,
+    "cheating": true,
+    "alpha_distribution": "normal",
+    "alpha_distribution_kwargs": {
+      "mean": 0,
+      "std": 1.0
+    },
+    "beta_distribution": "predefined",
+    "beta_distribution_kwargs": {
+      "values": [
+        0.2,
+        0.1
+      ]
+    },
+    "gamma_distribution": "predefined",
+    "gamma_distribution_kwargs": {
+      "values": [
+        0.05,
+        0.07
+      ]
+    },
+    "q_matrix": [
+      [1, 0],
+      [1, 0],
+      [1, 0],
+      [1, 0],
+      [1, 0],
+      [1, 0],
+      [1, 0],
+      [1, 0],
+      [1, 0],
+      [0, 1],
+      [0, 1],
+      [0, 1],
+      [0, 1],
+      [0, 1],
+      [0, 1],
+      [0, 1],
+      [0, 1],
+      [0, 1],
+      [1, 1]
+    ]
+  },
+  "scenarios": {
+    "debug_cheating_00": {
+      "cheating_prevalence": 0.00
+    },
+    "debug_cheating_25": {
+      "cheating_prevalence": 0.25
+    },
+    "debug_cheating_50": {
+      "cheating_prevalence": 0.50
+    }
+  },
+  "bak": {
+    "debug_cheating_01": {
+      "cheating": true,
+      "cheating_prevalence": 0.01
+    },
+    "debug_cheating_02": {
+      "cheating": true,
+      "cheating_prevalence": 0.02
+    },
+    "debug_cheating_03": {
+      "cheating": true,
+      "cheating_prevalence": 0.03
+    },
+    "debug_cheating_04": {
+      "cheating": true,
+      "cheating_prevalence": 0.04
+    },
+    "debug_cheating_07": {
+      "cheating": true,
+      "cheating_prevalence": 0.07
+    },
+
+    "debug_cheating_05": {
+      "cheating": true,
+      "cheating_prevalence": 0.05
+    },
+    "debug_cheating_10": {
+      "cheating": true,
+      "cheating_prevalence": 0.10
+    },
+    "debug_cheating_15": {
+      "cheating": true,
+      "cheating_prevalence": 0.15
+    },
+    "debug_cheating_20": {
+      "cheating": true,
+      "cheating_prevalence": 0.20
+    },
+    "debug_cheating_25": {
+      "cheating": true,
+      "cheating_prevalence": 0.25
+    },
+    "debug_cheating_30": {
+      "cheating": true,
+      "cheating_prevalence": 0.30
+    }
+  }
+}

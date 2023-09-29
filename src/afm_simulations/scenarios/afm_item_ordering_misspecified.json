@@ -1,0 +1,61 @@
+{
+    "general": {
+        "model": "afm",
+        "order": "in order",
+        "learning": "opportunities",
+        "student_count": 5000,
+        "item_count": 20,
+        "seed": 42,
+        "attrition": false,
+        "mastery": false,
+        "cheating": false,
+        "alpha_distribution": "normal",
+        "alpha_distribution_kwargs": {"mean": 0, "std": 1.0},
+        "beta_distribution": "predefined",
+        "gamma_distribution": "predefined",
+        "beta_distribution_kwargs": {"values": [0.5]},
+        "gamma_distribution_kwargs": {"values": [0.1]},
+        "q_matrix": [
+                [1],
+                [1],
+                [1],
+                [1],
+                [1],
+                [1],
+                [1],
+                [1],
+                [1],
+                [1],
+                [1],
+                [1],
+                [1],
+                [1],
+                [1],
+                [1],
+                [1],
+                [1],
+                [1],
+                [1]
+            ]
+    },
+    "scenarios": {
+        "ordering_bias_in_order_well_specified": {
+          "order": "in order"
+        },
+        "ordering_bias_in_order_misspecified": {
+          "order": "in order",
+          "beta_distribution_kwargs": {"values": [0.5, 0]},
+          "gamma_distribution_kwargs": {"values": [0.1, 0]}
+        },
+        "ordering_bias_random_order_well_specified": {
+          "order": "random order"
+        },
+        "ordering_bias_random_order_misspecified": {
+          "order": "random order",
+          "beta_distribution_kwargs": {"values": [0.5, 0]},
+          "gamma_distribution_kwargs": {"values": [0.1, 0]}
+        }
+    },
+    "bak": {
+    }
+}

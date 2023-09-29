@@ -1,0 +1,106 @@
+{
+  "general": {
+    "model": "afm",
+    "order": "random order",
+    "learning": "opportunities",
+    "student_count": 4000,
+    "item_count": 20,
+    "seed": 42,
+    "attrition": false,
+    "mastery": false,
+    "alpha_distribution": "normal",
+    "alpha_distribution_kwargs": {
+      "mean": 0,
+      "std": 1.0
+    },
+    "beta_distribution": "uniform",
+    "beta_distribution_kwargs": {
+      "min": -1.0,
+      "max": 1.0
+    },
+    "gamma_distribution": "uniform",
+    "gamma_distribution_kwargs": {
+      "min": 0.05,
+      "max": 0.2
+    },
+    "q_matrix": [
+      [0, 0, 0, 1, 0, 1, 1, 0],
+      [0, 0, 0, 1, 0, 0, 1, 0],
+      [0, 0, 0, 1, 0, 0, 1, 0],
+      [0, 1, 1, 0, 1, 0, 1, 0],
+      [0, 1, 0, 1, 0, 0, 1, 1],
+      [0, 0, 0, 0, 0, 0, 1, 0],
+      [1, 1, 0, 0, 0, 0, 1, 0],
+      [0, 0, 0, 0, 0, 0, 1, 0],
+      [0, 1, 0, 0, 0, 0, 0, 0],
+      [0, 1, 0, 0, 1, 0, 1, 1],
+      [0, 1, 0, 0, 1, 0, 1, 0],
+      [0, 0, 0, 0, 0, 0, 1, 1],
+      [0, 1, 0, 1, 1, 0, 1, 0],
+      [0, 1, 0, 0, 0, 0, 1, 0],
+      [1, 0, 0, 0, 0, 0, 1, 0],
+      [0, 1, 0, 0, 0, 0, 1, 0],
+      [0, 1, 0, 0, 1, 0, 1, 0],
+      [0, 1, 0, 0, 1, 1, 1, 0],
+      [1, 1, 1, 0, 1, 0, 1, 0],
+      [0, 1, 1, 0, 1, 0, 1, 0]
+    ]
+  },
+  "scenarios": {
+    "tatsuoka_complete_random": {},
+    "tatsuoka_complete_fixed": {
+      "order": "in order"
+    },
+    "tatsuoka_mastery_random": {
+      "mastery": true,
+      "mastery_streak": 3
+    },
+    "tatsuoka_mastery_fixed": {
+      "mastery": true,
+      "mastery_streak": 3,
+      "order": "in order"
+    },
+    "tatsuoka_complete_random_alpha_dominating": {
+        "alpha_distribution_kwargs": {
+          "mean": 0,
+          "std": 3.0
+      }
+    },
+    "tatsuoka_complete_fixed_alpha_dominating": {
+      "order": "in order",
+      "alpha_distribution_kwargs": {
+        "mean": 0,
+        "std": 3.0
+      }
+    },
+    "tatsuoka_mastery_random_alpha_dominating": {
+      "mastery": true,
+      "mastery_streak": 3,
+      "alpha_distribution_kwargs": {
+        "mean": 0,
+        "std": 3.0
+      }
+    },
+    "tatsuoka_mastery_fixed_alpha_dominating": {
+      "order": "in order",
+      "mastery": true,
+      "mastery_streak": 3,
+      "alpha_distribution_kwargs": {
+        "mean": 0,
+        "std": 3.0
+      }
+    },
+    "tatsuoka_complete_random_beta_dominating": {
+        "beta_distribution_kwargs": {
+          "min": -2.0,
+          "max": 2.0
+      }
+    },
+    "tatsuoka_complete_random_gamma_dominating": {
+        "gamma_distribution_kwargs": {
+          "min": 0.0,
+          "max": 0.5
+      }
+    }
+  }
+}

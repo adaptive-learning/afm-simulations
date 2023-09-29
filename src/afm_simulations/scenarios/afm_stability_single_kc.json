@@ -1,0 +1,1176 @@
+{
+    "general": {
+        "model": "afm",
+        "order": "random order",
+        "learning": "opportunities",
+        "seed": 42,
+        "attrition": false,
+        "mastery": false,
+        "alpha_distribution": "normal",
+        "alpha_distribution_kwargs": {"mean": 0, "std": 1.0},
+        "beta_distribution": "predefined",
+        "gamma_distribution": "predefined"
+    },
+    "scenarios": {
+        "afm_stability_single_KC_0.0_0.02_10s_5i": {
+            "student_count": 50,
+            "item_count": 5,
+            "q_matrix": [[1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [0.0]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_0.0_0.02_10s_10i": {
+            "student_count": 50,
+            "item_count": 10,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [0.0]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_0.0_0.02_10s_20i": {
+            "student_count": 50,
+            "item_count": 20,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [0.0]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_0.0_0.02_10s_50i": {
+            "student_count": 50,
+            "item_count": 50,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [0.0]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_0.0_0.02_10s_100i": {
+            "student_count": 50,
+            "item_count": 100,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [0.0]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_0.0_0.02_100s_5i": {
+            "student_count": 500,
+            "item_count": 5,
+            "q_matrix": [[1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [0.0]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_0.0_0.02_100s_10i": {
+            "student_count": 500,
+            "item_count": 10,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [0.0]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_0.0_0.02_100s_20i": {
+            "student_count": 500,
+            "item_count": 20,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [0.0]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_0.0_0.02_100s_50i": {
+            "student_count": 500,
+            "item_count": 50,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [0.0]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_0.0_0.02_100s_100i": {
+            "student_count": 500,
+            "item_count": 100,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [0.0]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_0.0_0.02_1000s_5i": {
+            "student_count": 5000,
+            "item_count": 5,
+            "q_matrix": [[1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [0.0]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_0.0_0.02_1000s_10i": {
+            "student_count": 5000,
+            "item_count": 10,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [0.0]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_0.0_0.02_1000s_20i": {
+            "student_count": 5000,
+            "item_count": 20,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [0.0]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_0.0_0.02_1000s_50i": {
+            "student_count": 5000,
+            "item_count": 50,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [0.0]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_0.0_0.02_1000s_100i": {
+            "student_count": 5000,
+            "item_count": 100,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [0.0]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_0.0_0.02_10000s_5i": {
+            "student_count": 50000,
+            "item_count": 5,
+            "q_matrix": [[1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [0.0]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_0.0_0.02_10000s_10i": {
+            "student_count": 50000,
+            "item_count": 10,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [0.0]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_0.0_0.02_10000s_20i": {
+            "student_count": 50000,
+            "item_count": 20,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [0.0]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_0.0_0.02_10000s_50i": {
+            "student_count": 50000,
+            "item_count": 50,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [0.0]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_0.0_0.02_10000s_100i": {
+            "student_count": 50000,
+            "item_count": 100,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [0.0]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_0.1_0.02_10s_5i": {
+            "student_count": 50,
+            "item_count": 5,
+            "q_matrix": [[1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [0.1]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_0.1_0.02_10s_10i": {
+            "student_count": 50,
+            "item_count": 10,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [0.1]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_0.1_0.02_10s_20i": {
+            "student_count": 50,
+            "item_count": 20,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [0.1]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_0.1_0.02_10s_50i": {
+            "student_count": 50,
+            "item_count": 50,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [0.1]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_0.1_0.02_10s_100i": {
+            "student_count": 50,
+            "item_count": 100,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [0.1]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_0.1_0.02_100s_5i": {
+            "student_count": 500,
+            "item_count": 5,
+            "q_matrix": [[1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [0.1]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_0.1_0.02_100s_10i": {
+            "student_count": 500,
+            "item_count": 10,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [0.1]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_0.1_0.02_100s_20i": {
+            "student_count": 500,
+            "item_count": 20,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [0.1]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_0.1_0.02_100s_50i": {
+            "student_count": 500,
+            "item_count": 50,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [0.1]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_0.1_0.02_100s_100i": {
+            "student_count": 500,
+            "item_count": 100,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [0.1]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_0.1_0.02_1000s_5i": {
+            "student_count": 5000,
+            "item_count": 5,
+            "q_matrix": [[1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [0.1]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_0.1_0.02_1000s_10i": {
+            "student_count": 5000,
+            "item_count": 10,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [0.1]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_0.1_0.02_1000s_20i": {
+            "student_count": 5000,
+            "item_count": 20,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [0.1]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_0.1_0.02_1000s_50i": {
+            "student_count": 5000,
+            "item_count": 50,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [0.1]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_0.1_0.02_1000s_100i": {
+            "student_count": 5000,
+            "item_count": 100,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [0.1]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_0.1_0.02_10000s_5i": {
+            "student_count": 50000,
+            "item_count": 5,
+            "q_matrix": [[1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [0.1]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_0.1_0.02_10000s_10i": {
+            "student_count": 50000,
+            "item_count": 10,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [0.1]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_0.1_0.02_10000s_20i": {
+            "student_count": 50000,
+            "item_count": 20,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [0.1]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_0.1_0.02_10000s_50i": {
+            "student_count": 50000,
+            "item_count": 50,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [0.1]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_0.1_0.02_10000s_100i": {
+            "student_count": 50000,
+            "item_count": 100,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [0.1]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_0.5_0.02_10s_5i": {
+            "student_count": 50,
+            "item_count": 5,
+            "q_matrix": [[1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [0.5]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_0.5_0.02_10s_10i": {
+            "student_count": 50,
+            "item_count": 10,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [0.5]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_0.5_0.02_10s_20i": {
+            "student_count": 50,
+            "item_count": 20,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [0.5]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_0.5_0.02_10s_50i": {
+            "student_count": 50,
+            "item_count": 50,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [0.5]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_0.5_0.02_10s_100i": {
+            "student_count": 50,
+            "item_count": 100,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [0.5]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_0.5_0.02_100s_5i": {
+            "student_count": 500,
+            "item_count": 5,
+            "q_matrix": [[1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [0.5]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_0.5_0.02_100s_10i": {
+            "student_count": 500,
+            "item_count": 10,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [0.5]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_0.5_0.02_100s_20i": {
+            "student_count": 500,
+            "item_count": 20,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [0.5]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_0.5_0.02_100s_50i": {
+            "student_count": 500,
+            "item_count": 50,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [0.5]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_0.5_0.02_100s_100i": {
+            "student_count": 500,
+            "item_count": 100,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [0.5]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_0.5_0.02_1000s_5i": {
+            "student_count": 5000,
+            "item_count": 5,
+            "q_matrix": [[1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [0.5]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_0.5_0.02_1000s_10i": {
+            "student_count": 5000,
+            "item_count": 10,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [0.5]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_0.5_0.02_1000s_20i": {
+            "student_count": 5000,
+            "item_count": 20,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [0.5]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_0.5_0.02_1000s_50i": {
+            "student_count": 5000,
+            "item_count": 50,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [0.5]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_0.5_0.02_1000s_100i": {
+            "student_count": 5000,
+            "item_count": 100,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [0.5]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_0.5_0.02_10000s_5i": {
+            "student_count": 50000,
+            "item_count": 5,
+            "q_matrix": [[1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [0.5]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_0.5_0.02_10000s_10i": {
+            "student_count": 50000,
+            "item_count": 10,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [0.5]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_0.5_0.02_10000s_20i": {
+            "student_count": 50000,
+            "item_count": 20,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [0.5]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_0.5_0.02_10000s_50i": {
+            "student_count": 50000,
+            "item_count": 50,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [0.5]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_0.5_0.02_10000s_100i": {
+            "student_count": 50000,
+            "item_count": 100,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [0.5]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_2.0_0.02_10s_5i": {
+            "student_count": 50,
+            "item_count": 5,
+            "q_matrix": [[1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [2.0]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_2.0_0.02_10s_10i": {
+            "student_count": 50,
+            "item_count": 10,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [2.0]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_2.0_0.02_10s_20i": {
+            "student_count": 50,
+            "item_count": 20,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [2.0]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_2.0_0.02_10s_50i": {
+            "student_count": 50,
+            "item_count": 50,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [2.0]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_2.0_0.02_10s_100i": {
+            "student_count": 50,
+            "item_count": 100,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [2.0]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_2.0_0.02_100s_5i": {
+            "student_count": 500,
+            "item_count": 5,
+            "q_matrix": [[1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [2.0]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_2.0_0.02_100s_10i": {
+            "student_count": 500,
+            "item_count": 10,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [2.0]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_2.0_0.02_100s_20i": {
+            "student_count": 500,
+            "item_count": 20,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [2.0]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_2.0_0.02_100s_50i": {
+            "student_count": 500,
+            "item_count": 50,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [2.0]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_2.0_0.02_100s_100i": {
+            "student_count": 500,
+            "item_count": 100,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [2.0]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_2.0_0.02_1000s_5i": {
+            "student_count": 5000,
+            "item_count": 5,
+            "q_matrix": [[1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [2.0]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_2.0_0.02_1000s_10i": {
+            "student_count": 5000,
+            "item_count": 10,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [2.0]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_2.0_0.02_1000s_20i": {
+            "student_count": 5000,
+            "item_count": 20,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [2.0]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_2.0_0.02_1000s_50i": {
+            "student_count": 5000,
+            "item_count": 50,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [2.0]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_2.0_0.02_1000s_100i": {
+            "student_count": 5000,
+            "item_count": 100,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [2.0]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_2.0_0.02_10000s_5i": {
+            "student_count": 50000,
+            "item_count": 5,
+            "q_matrix": [[1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [2.0]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_2.0_0.02_10000s_10i": {
+            "student_count": 50000,
+            "item_count": 10,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [2.0]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_2.0_0.02_10000s_20i": {
+            "student_count": 50000,
+            "item_count": 20,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [2.0]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_2.0_0.02_10000s_50i": {
+            "student_count": 50000,
+            "item_count": 50,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [2.0]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_2.0_0.02_10000s_100i": {
+            "student_count": 50000,
+            "item_count": 100,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [2.0]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_-1.0_0.02_10s_5i": {
+            "student_count": 50,
+            "item_count": 5,
+            "q_matrix": [[1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [-1.0]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_-1.0_0.02_10s_10i": {
+            "student_count": 50,
+            "item_count": 10,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [-1.0]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_-1.0_0.02_10s_20i": {
+            "student_count": 50,
+            "item_count": 20,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [-1.0]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_-1.0_0.02_10s_50i": {
+            "student_count": 50,
+            "item_count": 50,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [-1.0]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_-1.0_0.02_10s_100i": {
+            "student_count": 50,
+            "item_count": 100,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [-1.0]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_-1.0_0.02_100s_5i": {
+            "student_count": 500,
+            "item_count": 5,
+            "q_matrix": [[1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [-1.0]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_-1.0_0.02_100s_10i": {
+            "student_count": 500,
+            "item_count": 10,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [-1.0]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_-1.0_0.02_100s_20i": {
+            "student_count": 500,
+            "item_count": 20,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [-1.0]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_-1.0_0.02_100s_50i": {
+            "student_count": 500,
+            "item_count": 50,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [-1.0]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_-1.0_0.02_100s_100i": {
+            "student_count": 500,
+            "item_count": 100,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [-1.0]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_-1.0_0.02_1000s_5i": {
+            "student_count": 5000,
+            "item_count": 5,
+            "q_matrix": [[1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [-1.0]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_-1.0_0.02_1000s_10i": {
+            "student_count": 5000,
+            "item_count": 10,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [-1.0]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_-1.0_0.02_1000s_20i": {
+            "student_count": 5000,
+            "item_count": 20,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [-1.0]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_-1.0_0.02_1000s_50i": {
+            "student_count": 5000,
+            "item_count": 50,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [-1.0]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_-1.0_0.02_1000s_100i": {
+            "student_count": 5000,
+            "item_count": 100,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [-1.0]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_-1.0_0.02_10000s_5i": {
+            "student_count": 50000,
+            "item_count": 5,
+            "q_matrix": [[1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [-1.0]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_-1.0_0.02_10000s_10i": {
+            "student_count": 50000,
+            "item_count": 10,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [-1.0]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_-1.0_0.02_10000s_20i": {
+            "student_count": 50000,
+            "item_count": 20,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [-1.0]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_-1.0_0.02_10000s_50i": {
+            "student_count": 50000,
+            "item_count": 50,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [-1.0]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_-1.0_0.02_10000s_100i": {
+            "student_count": 50000,
+            "item_count": 100,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [-1.0]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_0.1_0.04_10s_5i": {
+            "student_count": 50,
+            "item_count": 5,
+            "q_matrix": [[1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [0.1]},
+            "gamma_distribution_kwargs": {"values": [0.04]}
+        },
+        "afm_stability_single_KC_0.1_0.04_10s_10i": {
+            "student_count": 50,
+            "item_count": 10,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [0.1]},
+            "gamma_distribution_kwargs": {"values": [0.04]}
+        },
+        "afm_stability_single_KC_0.1_0.04_10s_20i": {
+            "student_count": 50,
+            "item_count": 20,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [0.1]},
+            "gamma_distribution_kwargs": {"values": [0.04]}
+        },
+        "afm_stability_single_KC_0.1_0.04_10s_50i": {
+            "student_count": 50,
+            "item_count": 50,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [0.1]},
+            "gamma_distribution_kwargs": {"values": [0.04]}
+        },
+        "afm_stability_single_KC_0.1_0.04_10s_100i": {
+            "student_count": 50,
+            "item_count": 100,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [0.1]},
+            "gamma_distribution_kwargs": {"values": [0.04]}
+        },
+        "afm_stability_single_KC_0.1_0.04_100s_5i": {
+            "student_count": 500,
+            "item_count": 5,
+            "q_matrix": [[1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [0.1]},
+            "gamma_distribution_kwargs": {"values": [0.04]}
+        },
+        "afm_stability_single_KC_0.1_0.04_100s_10i": {
+            "student_count": 500,
+            "item_count": 10,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [0.1]},
+            "gamma_distribution_kwargs": {"values": [0.04]}
+        },
+        "afm_stability_single_KC_0.1_0.04_100s_20i": {
+            "student_count": 500,
+            "item_count": 20,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [0.1]},
+            "gamma_distribution_kwargs": {"values": [0.04]}
+        },
+        "afm_stability_single_KC_0.1_0.04_100s_50i": {
+            "student_count": 500,
+            "item_count": 50,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [0.1]},
+            "gamma_distribution_kwargs": {"values": [0.04]}
+        },
+        "afm_stability_single_KC_0.1_0.04_100s_100i": {
+            "student_count": 500,
+            "item_count": 100,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [0.1]},
+            "gamma_distribution_kwargs": {"values": [0.04]}
+        },
+        "afm_stability_single_KC_0.1_0.04_1000s_5i": {
+            "student_count": 5000,
+            "item_count": 5,
+            "q_matrix": [[1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [0.1]},
+            "gamma_distribution_kwargs": {"values": [0.04]}
+        },
+        "afm_stability_single_KC_0.1_0.04_1000s_10i": {
+            "student_count": 5000,
+            "item_count": 10,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [0.1]},
+            "gamma_distribution_kwargs": {"values": [0.04]}
+        },
+        "afm_stability_single_KC_0.1_0.04_1000s_20i": {
+            "student_count": 5000,
+            "item_count": 20,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [0.1]},
+            "gamma_distribution_kwargs": {"values": [0.04]}
+        },
+        "afm_stability_single_KC_0.1_0.04_1000s_50i": {
+            "student_count": 5000,
+            "item_count": 50,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [0.1]},
+            "gamma_distribution_kwargs": {"values": [0.04]}
+        },
+        "afm_stability_single_KC_0.1_0.04_1000s_100i": {
+            "student_count": 5000,
+            "item_count": 100,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [0.1]},
+            "gamma_distribution_kwargs": {"values": [0.04]}
+        },
+        "afm_stability_single_KC_0.1_0.04_10000s_5i": {
+            "student_count": 50000,
+            "item_count": 5,
+            "q_matrix": [[1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [0.1]},
+            "gamma_distribution_kwargs": {"values": [0.04]}
+        },
+        "afm_stability_single_KC_0.1_0.04_10000s_10i": {
+            "student_count": 50000,
+            "item_count": 10,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [0.1]},
+            "gamma_distribution_kwargs": {"values": [0.04]}
+        },
+        "afm_stability_single_KC_0.1_0.04_10000s_20i": {
+            "student_count": 50000,
+            "item_count": 20,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [0.1]},
+            "gamma_distribution_kwargs": {"values": [0.04]}
+        },
+        "afm_stability_single_KC_0.1_0.04_10000s_50i": {
+            "student_count": 50000,
+            "item_count": 50,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [0.1]},
+            "gamma_distribution_kwargs": {"values": [0.04]}
+        },
+        "afm_stability_single_KC_0.1_0.04_10000s_100i": {
+            "student_count": 50000,
+            "item_count": 100,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "beta_distribution_kwargs": {"values": [0.1]},
+            "gamma_distribution_kwargs": {"values": [0.04]}
+        },
+        "afm_stability_single_KC_tight_0.0_0.02_10s_5i": {
+            "student_count": 50,
+            "item_count": 5,
+            "q_matrix": [[1], [1], [1], [1], [1]],
+            "alpha_distribution_kwargs": {"mean": 0, "std": 0.01},
+            "beta_distribution_kwargs": {"values": [0.0]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_tight_0.0_0.02_10s_10i": {
+            "student_count": 50,
+            "item_count": 10,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "alpha_distribution_kwargs": {"mean": 0, "std": 0.01},
+            "beta_distribution_kwargs": {"values": [0.0]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_tight_0.0_0.02_10s_20i": {
+            "student_count": 50,
+            "item_count": 20,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "alpha_distribution_kwargs": {"mean": 0, "std": 0.01},
+            "beta_distribution_kwargs": {"values": [0.0]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_tight_0.0_0.02_10s_50i": {
+            "student_count": 50,
+            "item_count": 50,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "alpha_distribution_kwargs": {"mean": 0, "std": 0.01},
+            "beta_distribution_kwargs": {"values": [0.0]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_tight_0.0_0.02_10s_100i": {
+            "student_count": 50,
+            "item_count": 100,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "alpha_distribution_kwargs": {"mean": 0, "std": 0.01},
+            "beta_distribution_kwargs": {"values": [0.0]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_tight_0.0_0.02_100s_5i": {
+            "student_count": 500,
+            "item_count": 5,
+            "q_matrix": [[1], [1], [1], [1], [1]],
+            "alpha_distribution_kwargs": {"mean": 0, "std": 0.01},
+            "beta_distribution_kwargs": {"values": [0.0]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_tight_0.0_0.02_100s_10i": {
+            "student_count": 500,
+            "item_count": 10,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "alpha_distribution_kwargs": {"mean": 0, "std": 0.01},
+            "beta_distribution_kwargs": {"values": [0.0]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_tight_0.0_0.02_100s_20i": {
+            "student_count": 500,
+            "item_count": 20,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "alpha_distribution_kwargs": {"mean": 0, "std": 0.01},
+            "beta_distribution_kwargs": {"values": [0.0]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_tight_0.0_0.02_100s_50i": {
+            "student_count": 500,
+            "item_count": 50,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "alpha_distribution_kwargs": {"mean": 0, "std": 0.01},
+            "beta_distribution_kwargs": {"values": [0.0]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_tight_0.0_0.02_100s_100i": {
+            "student_count": 500,
+            "item_count": 100,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "alpha_distribution_kwargs": {"mean": 0, "std": 0.01},
+            "beta_distribution_kwargs": {"values": [0.0]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_tight_0.0_0.02_1000s_5i": {
+            "student_count": 5000,
+            "item_count": 5,
+            "q_matrix": [[1], [1], [1], [1], [1]],
+            "alpha_distribution_kwargs": {"mean": 0, "std": 0.01},
+            "beta_distribution_kwargs": {"values": [0.0]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_tight_0.0_0.02_1000s_10i": {
+            "student_count": 5000,
+            "item_count": 10,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "alpha_distribution_kwargs": {"mean": 0, "std": 0.01},
+            "beta_distribution_kwargs": {"values": [0.0]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_tight_0.0_0.02_1000s_20i": {
+            "student_count": 5000,
+            "item_count": 20,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "alpha_distribution_kwargs": {"mean": 0, "std": 0.01},
+            "beta_distribution_kwargs": {"values": [0.0]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_tight_0.0_0.02_1000s_50i": {
+            "student_count": 5000,
+            "item_count": 50,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "alpha_distribution_kwargs": {"mean": 0, "std": 0.01},
+            "beta_distribution_kwargs": {"values": [0.0]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_tight_0.0_0.02_1000s_100i": {
+            "student_count": 5000,
+            "item_count": 100,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "alpha_distribution_kwargs": {"mean": 0, "std": 0.01},
+            "beta_distribution_kwargs": {"values": [0.0]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_tight_0.0_0.02_10000s_5i": {
+            "student_count": 50000,
+            "item_count": 5,
+            "q_matrix": [[1], [1], [1], [1], [1]],
+            "alpha_distribution_kwargs": {"mean": 0, "std": 0.01},
+            "beta_distribution_kwargs": {"values": [0.0]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_tight_0.0_0.02_10000s_10i": {
+            "student_count": 50000,
+            "item_count": 10,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "alpha_distribution_kwargs": {"mean": 0, "std": 0.01},
+            "beta_distribution_kwargs": {"values": [0.0]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_tight_0.0_0.02_10000s_20i": {
+            "student_count": 50000,
+            "item_count": 20,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "alpha_distribution_kwargs": {"mean": 0, "std": 0.01},
+            "beta_distribution_kwargs": {"values": [0.0]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_tight_0.0_0.02_10000s_50i": {
+            "student_count": 50000,
+            "item_count": 50,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "alpha_distribution_kwargs": {"mean": 0, "std": 0.01},
+            "beta_distribution_kwargs": {"values": [0.0]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_tight_0.0_0.02_10000s_100i": {
+            "student_count": 50000,
+            "item_count": 100,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "alpha_distribution_kwargs": {"mean": 0, "std": 0.01},
+            "beta_distribution_kwargs": {"values": [0.0]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_tight_0.1_0.02_10s_5i": {
+            "student_count": 50,
+            "item_count": 5,
+            "q_matrix": [[1], [1], [1], [1], [1]],
+            "alpha_distribution_kwargs": {"mean": 0, "std": 0.01},
+            "beta_distribution_kwargs": {"values": [0.1]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_tight_0.1_0.02_10s_10i": {
+            "student_count": 50,
+            "item_count": 10,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "alpha_distribution_kwargs": {"mean": 0, "std": 0.01},
+            "beta_distribution_kwargs": {"values": [0.1]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_tight_0.1_0.02_10s_20i": {
+            "student_count": 50,
+            "item_count": 20,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "alpha_distribution_kwargs": {"mean": 0, "std": 0.01},
+            "beta_distribution_kwargs": {"values": [0.1]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_tight_0.1_0.02_10s_50i": {
+            "student_count": 50,
+            "item_count": 50,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "alpha_distribution_kwargs": {"mean": 0, "std": 0.01},
+            "beta_distribution_kwargs": {"values": [0.1]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_tight_0.1_0.02_10s_100i": {
+            "student_count": 50,
+            "item_count": 100,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "alpha_distribution_kwargs": {"mean": 0, "std": 0.01},
+            "beta_distribution_kwargs": {"values": [0.1]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_tight_0.1_0.02_100s_5i": {
+            "student_count": 500,
+            "item_count": 5,
+            "q_matrix": [[1], [1], [1], [1], [1]],
+            "alpha_distribution_kwargs": {"mean": 0, "std": 0.01},
+            "beta_distribution_kwargs": {"values": [0.1]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_tight_0.1_0.02_100s_10i": {
+            "student_count": 500,
+            "item_count": 10,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "alpha_distribution_kwargs": {"mean": 0, "std": 0.01},
+            "beta_distribution_kwargs": {"values": [0.1]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_tight_0.1_0.02_100s_20i": {
+            "student_count": 500,
+            "item_count": 20,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "alpha_distribution_kwargs": {"mean": 0, "std": 0.01},
+            "beta_distribution_kwargs": {"values": [0.1]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_tight_0.1_0.02_100s_50i": {
+            "student_count": 500,
+            "item_count": 50,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "alpha_distribution_kwargs": {"mean": 0, "std": 0.01},
+            "beta_distribution_kwargs": {"values": [0.1]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_tight_0.1_0.02_100s_100i": {
+            "student_count": 500,
+            "item_count": 100,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "alpha_distribution_kwargs": {"mean": 0, "std": 0.01},
+            "beta_distribution_kwargs": {"values": [0.1]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_tight_0.1_0.02_1000s_5i": {
+            "student_count": 5000,
+            "item_count": 5,
+            "q_matrix": [[1], [1], [1], [1], [1]],
+            "alpha_distribution_kwargs": {"mean": 0, "std": 0.01},
+            "beta_distribution_kwargs": {"values": [0.1]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_tight_0.1_0.02_1000s_10i": {
+            "student_count": 5000,
+            "item_count": 10,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "alpha_distribution_kwargs": {"mean": 0, "std": 0.01},
+            "beta_distribution_kwargs": {"values": [0.1]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_tight_0.1_0.02_1000s_20i": {
+            "student_count": 5000,
+            "item_count": 20,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "alpha_distribution_kwargs": {"mean": 0, "std": 0.01},
+            "beta_distribution_kwargs": {"values": [0.1]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_tight_0.1_0.02_1000s_50i": {
+            "student_count": 5000,
+            "item_count": 50,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "alpha_distribution_kwargs": {"mean": 0, "std": 0.01},
+            "beta_distribution_kwargs": {"values": [0.1]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_tight_0.1_0.02_1000s_100i": {
+            "student_count": 5000,
+            "item_count": 100,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "alpha_distribution_kwargs": {"mean": 0, "std": 0.01},
+            "beta_distribution_kwargs": {"values": [0.1]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_tight_0.1_0.02_10000s_5i": {
+            "student_count": 50000,
+            "item_count": 5,
+            "q_matrix": [[1], [1], [1], [1], [1]],
+            "alpha_distribution_kwargs": {"mean": 0, "std": 0.01},
+            "beta_distribution_kwargs": {"values": [0.1]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_tight_0.1_0.02_10000s_10i": {
+            "student_count": 50000,
+            "item_count": 10,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "alpha_distribution_kwargs": {"mean": 0, "std": 0.01},
+            "beta_distribution_kwargs": {"values": [0.1]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_tight_0.1_0.02_10000s_20i": {
+            "student_count": 50000,
+            "item_count": 20,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "alpha_distribution_kwargs": {"mean": 0, "std": 0.01},
+            "beta_distribution_kwargs": {"values": [0.1]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_tight_0.1_0.02_10000s_50i": {
+            "student_count": 50000,
+            "item_count": 50,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "alpha_distribution_kwargs": {"mean": 0, "std": 0.01},
+            "beta_distribution_kwargs": {"values": [0.1]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        },
+        "afm_stability_single_KC_tight_0.1_0.02_10000s_100i": {
+            "student_count": 50000,
+            "item_count": 100,
+            "q_matrix": [[1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1], [1]],
+            "alpha_distribution_kwargs": {"mean": 0, "std": 0.01},
+            "beta_distribution_kwargs": {"values": [0.1]},
+            "gamma_distribution_kwargs": {"values": [0.02]}
+        }
+    }
+}

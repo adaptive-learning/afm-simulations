@@ -1,0 +1,76 @@
+{
+  "general": {
+    "model": "afm",
+    "order": "random order",
+    "learning": "opportunities",
+    "student_count": 10000,
+    "item_count": 20,
+    "seed": 42,
+    "attrition": false,
+    "mastery": false,
+    "cheating": true,
+    "alpha_distribution": "normal",
+    "alpha_distribution_kwargs": {
+      "mean": 0,
+      "std": 1.0
+    },
+    "beta_distribution": "uniform",
+    "beta_distribution_kwargs": {
+      "min": 0.01,
+      "max": 1.0
+    },
+    "gamma_distribution": "uniform",
+    "gamma_distribution_kwargs": {
+      "min": 0.01,
+      "max": 0.2
+    },
+    "q_matrix": [
+      [0, 0, 0, 1, 0, 1, 1, 0],
+      [0, 0, 0, 1, 0, 0, 1, 0],
+      [0, 0, 0, 1, 0, 0, 1, 0],
+      [0, 1, 1, 0, 1, 0, 1, 0],
+      [0, 1, 0, 1, 0, 0, 1, 1],
+      [0, 0, 0, 0, 0, 0, 1, 0],
+      [1, 1, 0, 0, 0, 0, 1, 0],
+      [0, 0, 0, 0, 0, 0, 1, 0],
+      [0, 1, 0, 0, 0, 0, 0, 0],
+      [0, 1, 0, 0, 1, 0, 1, 1],
+      [0, 1, 0, 0, 1, 0, 1, 0],
+      [0, 0, 0, 0, 0, 0, 1, 1],
+      [0, 1, 0, 1, 1, 0, 1, 0],
+      [0, 1, 0, 0, 0, 0, 1, 0],
+      [1, 0, 0, 0, 0, 0, 1, 0],
+      [0, 1, 0, 0, 0, 0, 1, 0],
+      [0, 1, 0, 0, 1, 0, 1, 0],
+      [0, 1, 0, 0, 1, 1, 1, 0],
+      [1, 1, 1, 0, 1, 0, 1, 0],
+      [0, 1, 1, 0, 1, 0, 1, 0]
+    ]
+  },
+  "scenarios": {
+    "tatsuoka_cheating_00": {
+      "cheating_prevalence": 0.00
+    },
+    "tatsuoka_cheating_01": {
+      "cheating_prevalence": 0.01
+    },
+    "tatsuoka_cheating_02": {
+      "cheating_prevalence": 0.02
+    },
+    "tatsuoka_cheating_03": {
+      "cheating_prevalence": 0.03
+    },
+    "tatsuoka_cheating_04": {
+      "cheating_prevalence": 0.04
+    },
+    "tatsuoka_cheating_05": {
+      "cheating_prevalence": 0.05
+    },
+    "tatsuoka_cheating_20": {
+      "cheating_prevalence": 0.20
+    },
+    "tatsuoka_cheating_50": {
+      "cheating_prevalence": 0.50
+    }
+  }
+}

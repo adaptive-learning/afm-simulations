@@ -4,7 +4,7 @@ version = "1.0.0"
 description = "Code used in PhD thesis Exploring Statistical Biases in Educational Data: A~Simulation-Based Approach."
 authors = ["Jaroslav Čechák <xcechak1@fi.muni.cz>"]
 readme = "README.md"
-packages = [{include = "afm"}, {include = "simulations"}]
+packages = [{include = "afm_simulations", from = "src"}]
 
 [tool.poetry.dependencies]
 python = ">=3.9 <3.11"

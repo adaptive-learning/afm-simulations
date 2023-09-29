@@ -1,0 +1,83 @@
+{
+  "general": {
+    "model": "afm",
+    "order": "random order",
+    "learning": "opportunities",
+    "student_count": 4000,
+    "item_count": 10,
+    "seed": 42,
+    "attrition": false,
+    "mastery": false,
+    "alpha_distribution": "normal",
+    "alpha_distribution_kwargs": {
+      "mean": 0,
+      "std": 1.0
+    },
+    "beta_distribution": "predefined",
+    "beta_distribution_kwargs": {
+      "values": [0]
+    },
+    "gamma_distribution": "predefined",
+    "gamma_distribution_kwargs": {
+      "values": [0.2]
+    },
+    "q_matrix": [
+      [1],
+      [1],
+      [1],
+      [1],
+      [1],
+      [1],
+      [1],
+      [1],
+      [1],
+      [1]
+    ]
+  },
+  "scenarios": {
+    "alpha_1_complete_random": {},
+    "alpha_0.1_complete_random": {
+      "alpha_distribution_kwargs": {
+        "mean": 0,
+        "std": 0.5
+      }
+    },
+    "alpha_2_complete_random": {
+      "alpha_distribution_kwargs": {
+        "mean": 0,
+        "std": 2.0
+      }
+    },
+
+    "alpha_3_complete_random": {
+      "alpha_distribution_kwargs": {
+        "mean": 0,
+        "std": 3.0
+      }
+    },
+    "alpha_1_beta_neg0.5_complete_random": {
+      "beta_distribution_kwargs": {
+        "values": [-0.5]
+      }
+    },
+    "alpha_2_beta_neg0.5_complete_random": {
+      "alpha_distribution_kwargs": {
+        "mean": 0,
+        "std": 2.0
+      },
+      "beta_distribution_kwargs": {
+        "values": [-0.5]
+      }
+    },
+
+    "alpha_3_beta_neg0.5_complete_random": {
+      "alpha_distribution_kwargs": {
+        "mean": 0,
+        "std": 3.0
+      },
+      "beta_distribution_kwargs": {
+        "values": [-0.5]
+      }
+    }
+  }
+}

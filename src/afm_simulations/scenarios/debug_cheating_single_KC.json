@@ -1,0 +1,93 @@
+{
+  "general": {
+    "model": "afm",
+    "order": "random order",
+    "learning": "opportunities",
+    "student_count": 5000,
+    "item_count": 20,
+    "seed": 42,
+    "attrition": false,
+    "mastery": false,
+    "cheating": true,
+    "alpha_distribution": "normal",
+    "alpha_distribution_kwargs": {
+      "mean": 0,
+      "std": 1.0
+    },
+    "beta_distribution": "predefined",
+    "beta_distribution_kwargs": {
+      "values": [
+        0.2
+      ]
+    },
+    "gamma_distribution": "predefined",
+    "gamma_distribution_kwargs": {
+      "values": [
+        0.05
+      ]
+    },
+    "q_matrix": [
+      [1],
+      [1],
+      [1],
+      [1],
+      [1],
+      [1],
+      [1],
+      [1],
+      [1],
+      [1],
+      [1],
+      [1],
+      [1],
+      [1],
+      [1],
+      [1],
+      [1],
+      [1],
+      [1],
+      [1]
+    ],
+    "compromised_items": [0, 1 ,2]
+  },
+  "scenarios": {
+    "debug_cheating_single_KC_00": {
+      "cheating_prevalence": 0.00
+    },
+    "debug_cheating_single_KC_25": {
+      "cheating_prevalence": 0.25
+    },
+    "debug_cheating_single_KC_50": {
+      "cheating_prevalence": 0.50
+    }
+  },
+  "bak": {
+        "debug_cheating_single_KC_01": {
+      "cheating": true,
+      "cheating_prevalence": 0.01
+    },
+    "debug_cheating_single_KC_02": {
+      "cheating": true,
+      "cheating_prevalence": 0.02
+    },
+    "debug_cheating_single_KC_03": {
+      "cheating": true,
+      "cheating_prevalence": 0.03
+    },
+    "debug_cheating_single_KC_04": {
+      "cheating": true,
+      "cheating_prevalence": 0.04
+    },
+    "debug_cheating_single_KC_07": {
+      "cheating": true,
+      "cheating_prevalence": 0.07
+    },
+    "debug_cheating_single_KC_20": {
+      "cheating": true,
+      "cheating_prevalence": 0.20
+    },
+    "debug_cheating_single_KC_99": {
+      "cheating_prevalence": 0.99
+    }
+  }
+}
