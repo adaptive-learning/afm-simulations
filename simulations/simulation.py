@@ -795,13 +795,14 @@ def plot_mean_times(
 
 
 def plot_mean_order_convergence(
-    full_log,
-    scenarios=[],
-    window_size=10,
-    path=None,
-    labels=None,
-    title="Item order convergence (Spearman corr. coef.)",
+    full_log: pd.DataFrame,
+    scenarios: Sequence[str] = (),
+    window_size: int = 10,
+    path: Optional[Union[str, Path]] = None,
+    labels: Optional[str] = None,
+    title: str = "Item order convergence (Spearman corr. coef.)",
 ):
+    """Plot convergence of item difficulty estimates"""
     assert scenarios
     ideal_order = list(
         full_log.groupby("item_id")["item_true_difficulty"].max().sort_values().index
@@ -817,7 +818,7 @@ def plot_mean_order_convergence(
         for i, row in enumerate(
             full_log[full_log.scenario == scenario_name]
             .groupby("student_id")
-            .apply(lambda g: list(g.item_id))
+            .apply(lambda g: list(g.item_id))  # type: ignore
         )
     ]
     df = pd.DataFrame(correlations, columns=["i", "correlation", "scenario"])
@@ -836,7 +837,7 @@ def plot_mean_order_convergence(
 
 
 class CustomJSONEncoder(json.JSONEncoder):
-    def default(self, obj):
+    def default(self, obj: Any):
         try:
             json.JSONEncoder.default(self, obj)
         except TypeError:
