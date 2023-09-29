@@ -7,7 +7,7 @@ from typing import Any, Literal, Optional
 import numpy as np
 import pandas as pd
 import tensorflow as tf
-from sklearn.model_selection import KFold
+from sklearn.model_selection import KFold  # type: ignore
 from tqdm import tqdm
 
 from .models import AFM
@@ -93,6 +93,15 @@ def load_results(path: Path) -> pd.DataFrame:
 def load_fold(
     base_folder: Path, fold: int, scenario: str, fold_folder: Optional[Path] = None
 ) -> pd.DataFrame:
+    """
+    Load ground truth parameter for a single fold of a scenario simulation
+
+    :param base_folder: Path to a folder with simulated scenario
+    :param fold: Number identifier of the fold to load
+    :param scenario: Name of the scenario being loaded
+    :param fold_folder: Optional subfolder containing the requested fold
+    :return: Data Frame with all ground truth parameters used in a fold
+    """
     if fold_folder is None:
         fold_folder = base_folder
     params_path = fold_folder / (f"fold_{fold}_" + EXPORT_PATH)
@@ -178,7 +187,9 @@ def load_scenario(
     with open(scenario_path / "setting.json", "r") as f:
         setting = json.load(f)
 
-    q_matrix = pd.read_csv(scenario_path / "q_matrix.csv").set_index("item_id").values
+    q_matrix = (
+        pd.read_csv(scenario_path / "q_matrix.csv").set_index("item_id").to_numpy()
+    )
     return log, alphas, betas, gammas, q_matrix, setting
 
 
@@ -186,18 +197,24 @@ def get_parameters(
     params: pd.DataFrame, param_name: Literal["alpha", "beta", "gamma"]
 ) -> np.ndarray:
     """Extract values of a single type of AFM parameter."""
-    return params[params.name.str.contains(param_name)].value.values
+    return params[params.name.str.contains(param_name)].value.values  # type: ignore
 
 
 def load_fitted_scenario(
     scenario_path: Path,
 ) -> SCENARIO_FULL_DEF:
+    """
+    Load data about simulated scenario and AFM fitted to the simulated data
+
+    :param scenario_path: Path to a folder containing data to load
+    :return: tuple containing simulation data and description of fitted AFM
+    """
     log, alphas, betas, gammas, q_matrix, setting = load_scenario(scenario_path)
 
     num_students = len(log["student_id"].unique())
-    student_ids = log["student_id"].values
-    item_ids = log["item_id"].values
-    learning_opportunities = AFM.compute_opportunities(
+    student_ids = log["student_id"].to_numpy()
+    item_ids = log["item_id"].to_numpy()
+    learning_opportunities: np.ndarray = AFM.compute_opportunities(
         student_ids, item_ids, q_matrix, num_students=num_students
     )
     learning_opportunities_df = pd.DataFrame(
@@ -245,6 +262,21 @@ def fit_afm_on_simulated_data(
     student_to_exclude: Optional[list[int]] = None,
     q_matrix_override: Optional[np.ndarray] = None,
 ) -> None:
+    """
+    Fit AFM to a simulated data of a single scenario
+
+    It internally splits simulated data into 5 folds such that all responses
+    of a single student fall in the same fold. All results are saved as CSV
+    files in the scenario folder.
+
+    :param base_folder: Path to a folder with simulated data
+    :param afm_export_path: Name of CSV file to serialize AFM model
+    :param items_to_exclude: Optional list of item ids to exclude from fitting
+    :param student_to_exclude: Optional list of student ids to exclude from
+                               fitting
+    :param q_matrix_override: Optional Q-matrix to use instead of scenario's
+                              ground truth one
+    """
     if items_to_exclude is None:
         items_to_exclude = list()
     if student_to_exclude is None:
@@ -258,15 +290,15 @@ def fit_afm_on_simulated_data(
 
     num_students = len(log["student_id"].unique())
     num_items = len(log["item_id"].unique())
-    student_ids = log["student_id"].values
-    item_ids = log["item_id"].values
+    student_ids = log["student_id"].to_numpy()
+    item_ids = log["item_id"].to_numpy()
     learning_opportunities = AFM.compute_opportunities(
         student_ids, item_ids, q_matrix, num_students=num_students
     )
 
     kf = KFold(n_splits=5, shuffle=True, random_state=42)
     all_student_ids = (
-        log["student_id"]
+        log["student_id"]  # type: ignore
         .drop_duplicates()[lambda x: ~x.isin(student_to_exclude)]
         .unique()
     )
@@ -284,10 +316,10 @@ def fit_afm_on_simulated_data(
         )
         fold_log = log[selected_log_indices]
         fold_num_observations = len(fold_log)
-        fold_student_ids = fold_log["student_id"].values
-        fold_item_ids = fold_log["item_id"].values
+        fold_student_ids = fold_log["student_id"].to_numpy()
+        fold_item_ids = fold_log["item_id"].to_numpy()
         fold_learning_opportunities = learning_opportunities[selected_log_indices]
-        fold_correct = fold_log["solved"].values
+        fold_correct = fold_log["solved"].to_numpy()
 
         pd.Series([fold_log["cheating"].sum()], name="num_answers_cheated").to_csv(
             base_folder / f"fold_{fold}_cheating.csv", index=False
@@ -410,6 +442,9 @@ def fit_afm_on_simulated_data_fold(
     fit_betas: bool = True,
     fit_gammas: bool = True,
 ) -> tuple[float, float, np.ndarray, AFM]:
+    """
+    Fit AFM to a simulated data of a single scenario and a single fold
+    """
     afm = AFM.get_model(
         num_students=num_students,
         num_items=num_items,
@@ -450,8 +485,11 @@ def fit_afm_on_simulated_data_fold(
     )
 
     bce = tf.keras.losses.BinaryCrossentropy(from_logits=False)
-    rmse = tf.keras.metrics.RootMeanSquaredError()
+    rmse = tf.keras.metrics.RootMeanSquaredError()  # type: ignore
 
-    print(f"Results:\nLL:{bce(correct, y_pred)}\nRMSE:{rmse(correct, y_pred)}\n\n")
+    log_likelihood: float = bce(correct, y_pred).numpy()  # type: ignore
+    rmse_value: float = rmse(correct, y_pred).numpy()  # type: ignore
 
-    return bce(correct, y_pred).numpy(), rmse(correct, y_pred).numpy(), y_pred, afm
+    print(f"Results:\nLL:{log_likelihood}\nRMSE:{rmse_value}\n\n")
+
+    return log_likelihood, rmse_value, y_pred, afm
