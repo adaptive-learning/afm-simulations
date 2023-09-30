@@ -274,14 +274,19 @@ def fit_all_scenarios(
     scenario_paths: Sequence[Path],
     items_to_exclude: Optional[list[int]] = None,
     student_to_exclude: Optional[list[int]] = None,
+    q_matrix_overrides: Optional[dict[str, np.ndarray]] = None,
 ) -> None:
     """Fit AFM to all scenarios in the given collection"""
+    if q_matrix_overrides is None:
+        q_matrix_overrides = dict()
+
     for scenario in tqdm(scenario_paths, desc="fitting scenarios"):
         print("Fitting", scenario.name)
         fit_afm_on_simulated_data(
             scenario,
             items_to_exclude=items_to_exclude,
             student_to_exclude=student_to_exclude,
+            q_matrix_override=q_matrix_overrides.get(scenario.name),
         )
 
 
