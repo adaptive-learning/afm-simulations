@@ -97,10 +97,11 @@ def analyze_alpha_distributions(params_df: pd.DataFrame) -> None:
 
 
 def main() -> None:
+    package_root = Path(__file__).parent.parent
     run_simulation(
         [
-            "../scenarios/cheating_combined_0.json",
-            "../scenarios/cheating_combined_thirds_simple.json",
+            package_root / "scenarios/cheating_combined_0.json",
+            package_root / "scenarios/cheating_combined_thirds_simple.json",
         ]
     )
 

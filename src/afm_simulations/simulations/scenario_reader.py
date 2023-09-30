@@ -1,6 +1,7 @@
 import json
 from copy import deepcopy
-from typing import Any, Dict
+from pathlib import Path
+from typing import Any, Dict, Union
 
 import numpy as np
 
@@ -172,7 +173,7 @@ class ScenarioReader:
 
     mastery_keys = {"mastery_streak"}
 
-    def __init__(self, scenarios_path: str):
+    def __init__(self, scenarios_path: Union[str, Path]):
         self.scenarios_path = scenarios_path
         self._check_json()
         self.scenarios = self._load_scenarios()

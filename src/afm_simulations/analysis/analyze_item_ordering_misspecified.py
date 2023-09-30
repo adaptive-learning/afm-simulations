@@ -139,9 +139,10 @@ def add_scenario_metadata(df: pd.DataFrame) -> pd.DataFrame:
 
 
 def main() -> None:
+    package_root = Path(__file__).parent.parent
     run_simulation(
         [
-            "../scenarios/afm_item_ordering_misspecified.json",
+            package_root / "scenarios/afm_item_ordering_misspecified.json",
         ]
     )
 

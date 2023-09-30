@@ -176,9 +176,10 @@ def plot_learning_curves(
 
 
 def main() -> None:
+    package_root = Path(__file__).parent.parent
     run_simulation(
         [
-            "../scenarios/cheating_combined_thirds_simple.json",
+            package_root / "scenarios/cheating_combined_thirds_simple.json",
         ]
     )
 

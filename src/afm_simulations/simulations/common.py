@@ -1,12 +1,12 @@
 from pathlib import Path
-from typing import Sequence
+from typing import Sequence, Union
 
 from .scenario_reader import ScenarioReader
 from .simulation import Simulation
 
 
 def run_simulation(
-    scenario_jsons: Sequence[str],
+    scenario_jsons: Sequence[Union[str, Path]],
     plot_results: bool = False,
     force_regenerate: bool = False,
 ) -> None:
