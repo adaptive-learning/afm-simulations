@@ -113,6 +113,22 @@ def load_results(path: Path) -> pd.DataFrame:
     return pd.concat(results)
 
 
+def load_specific_results(scenario_paths: Sequence[Path]) -> pd.DataFrame:
+    """
+    Load fitted parameters of scenarios
+
+    :param scenario_paths: Path containing scenarios to load
+    :return: A single dataframe with all scenarios
+    """
+    logger.info(f"Loading parameters from fitted scenarios in {scenario_paths}")
+    results = []
+    for base_path in tqdm(scenario_paths, desc="loading scenarios"):
+        results_path = base_path / "results.csv"
+        results.append(pd.read_csv(results_path))
+
+    return pd.concat(results)
+
+
 def load_fold(base_folder: Path, fold: int, scenario: str, fold_folder: Optional[Path] = None) -> pd.DataFrame:
     """
     Load ground truth parameter for a single fold of a scenario simulation
