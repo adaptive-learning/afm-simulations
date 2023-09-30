@@ -231,9 +231,7 @@ class ScenarioReader:
         if setting["model"] == "afm":
             setting["item_solver_chain"] = ["afm"]
             for param in "alpha", "beta", "gamma":
-                setting[f"{param}_distribution"] = DISTRIBUTIONS[
-                    setting[f"{param}_distribution"]
-                ]
+                setting[f"{param}_distribution"] = DISTRIBUTIONS[setting[f"{param}_distribution"]]
 
         if setting.get("cheating", False):
             setting = self._modify_dict(setting, CHEATING)
@@ -250,8 +248,6 @@ class ScenarioReader:
             if key not in modified:
                 modified[key] = value
             else:
-                assert isinstance(
-                    value, list
-                ), "Dictionaries contain contradicting keys"
+                assert isinstance(value, list), "Dictionaries contain contradicting keys"
                 modified[key] = deepcopy(modified[key]) + value
         return modified

@@ -30,29 +30,23 @@ class AFM(Model):
         self.num_students = num_students
         self.num_items = num_items
         self.num_knowledge_components = (
-            num_knowledge_components
-            if num_knowledge_components is not None
-            else q_matrix.shape[1]
+            num_knowledge_components if num_knowledge_components is not None else q_matrix.shape[1]
         )
         self.max_learning_opportunities = (
-            max_learning_opportunities
-            if max_learning_opportunities is not None
-            else q_matrix.sum(axis=0)
+            max_learning_opportunities if max_learning_opportunities is not None else q_matrix.sum(axis=0)
         )
         assert q_matrix.shape == (
-            num_items,
-            num_knowledge_components,
+            self.num_items,
+            self.num_knowledge_components,
         ), (
-            f"Shape of Q matrix {q_matrix.shape} does not match number of items {num_items} "
+            f"The shape of Q matrix {q_matrix.shape} does not match the number of items {num_items} "
             f"times number of knowledge components {num_knowledge_components}"
         )
 
         self.q_matrix = tf.constant(value=q_matrix, name="q_matrix", dtype=tf.float32)
 
         self.alphas = tf.Variable(
-            initial_value=init_alphas  # type: ignore
-            if init_alphas is not None
-            else np.zeros(self.num_students),
+            initial_value=init_alphas if init_alphas is not None else np.zeros(self.num_students),  # type: ignore
             name="alphas",
             dtype=tf.float32,
             trainable=fit_alphas,
@@ -97,9 +91,7 @@ class AFM(Model):
         )
 
         # gather vector with \alpha_i based on student id i in input
-        student_proficiencies = tf.gather(
-            self.alphas, student_ids, name="student_proficiencies"
-        )
+        student_proficiencies = tf.gather(self.alphas, student_ids, name="student_proficiencies")
         # gather matrix q_jk consisting of lines q_j from Q-matrix
         qs = tf.gather(self.q_matrix, item_ids, name="qs")
 
@@ -110,19 +102,13 @@ class AFM(Model):
         # T. Effenberger, R. Pelanek, and J. Cechak.
         # Exploration of the robustness and generalizability of the additive factors model.
         gammas_prime = self.gammas * self.max_learning_opportunities
-        normalized_learning_opportunities = (
-            learning_opportunities / self.max_learning_opportunities
-        )
+        normalized_learning_opportunities = learning_opportunities / self.max_learning_opportunities
 
         # compute \sum_{k=1}^K \gamma_k q_{jk} t_{ik}
-        learning_effects = tf.reduce_sum(
-            normalized_learning_opportunities * gammas_prime * qs, axis=1
-        )
+        learning_effects = tf.reduce_sum(normalized_learning_opportunities * gammas_prime * qs, axis=1)
 
         # compute logits z_{ij}
-        logits = tf.add_n(
-            [student_proficiencies + tasks_easiness + learning_effects], name="logits"
-        )
+        logits = tf.add_n([student_proficiencies + tasks_easiness + learning_effects], name="logits")
 
         # convert logits to probability values
         correct_answer_probabilities = tf.math.sigmoid(logits)
@@ -133,9 +119,7 @@ class AFM(Model):
         tf.summary.histogram("gammas", self.gammas)
 
         # regularization of alphas
-        alpha_penalization_term = (
-            self.alpha_regularizer(self.alphas) / self.num_students
-        )
+        alpha_penalization_term = self.alpha_regularizer(self.alphas) / self.num_students
         self.add_loss(alpha_penalization_term)
 
         return correct_answer_probabilities
@@ -156,12 +140,8 @@ class AFM(Model):
         assert (
             0 <= student_ids.min() and student_ids.max() < self.num_students
         ), "Students ids must be between 0 and NUM_STUDENTS - 1"
-        assert (
-            0 <= item_ids.min() and item_ids.max() < self.num_items
-        ), "Items ids must be between 0 and NUM_ITEMS - 1"
-        assert (
-            student_ids.shape[0] == item_ids.shape[0]
-        ), "Student and item ids shape mismatch"
+        assert 0 <= item_ids.min() and item_ids.max() < self.num_items, "Items ids must be between 0 and NUM_ITEMS - 1"
+        assert student_ids.shape[0] == item_ids.shape[0], "Student and item ids shape mismatch"
         assert (
             student_ids.shape[0] == learning_opportunities.shape[0]
         ), "Student ids and learning opportunities shape mismatch"
@@ -310,9 +290,7 @@ class AFM(Model):
             staircase=True,
         )
         optimizer = tf.keras.optimizers.Adam(learning_rate=lr_schedule)
-        loss_object = tf.keras.losses.BinaryCrossentropy(
-            from_logits=False, name="binary_crossentropy_loss"
-        )
+        loss_object = tf.keras.losses.BinaryCrossentropy(from_logits=False, name="binary_crossentropy_loss")
 
         afm.compile(
             optimizer=optimizer,
@@ -331,12 +309,10 @@ class AFM(Model):
         :param path: Path to store exported values
         """
         names = (
-            [f"alpha{i}" for i in range(len(self.alphas))]
-            + [f"beta{i}" for i in range(len(self.betas))]
-            + [f"gamma{i}" for i in range(len(self.gammas))]
+            [f"alpha{i}" for i in range(len(self.alphas.numpy()))]
+            + [f"beta{i}" for i in range(len(self.betas.numpy()))]
+            + [f"gamma{i}" for i in range(len(self.gammas.numpy()))]
         )
-        values = np.hstack(
-            (self.alphas.numpy(), self.betas.numpy(), self.gammas.numpy())
-        )
+        values = np.hstack((self.alphas.numpy(), self.betas.numpy(), self.gammas.numpy()))
         params = pd.DataFrame({"name": names, "value": values})
         params.to_csv(path, index=False)

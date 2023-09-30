@@ -29,9 +29,7 @@ class Item:
 
 
 class Student:
-    def __init__(
-        self, student_id: int, skill: float, opportunities: np.ndarray
-    ) -> None:
+    def __init__(self, student_id: int, skill: float, opportunities: np.ndarray) -> None:
         self.id = student_id
         self.skill = skill
         self.opportunities = opportunities
@@ -105,9 +103,7 @@ class Simulation:
         """Main simulation code"""
         # initialize
         self.initializer()
-        for self.active_student in tqdm(
-            self.students, desc="simulating students", leave=False
-        ):
+        for self.active_student in tqdm(self.students, desc="simulating students", leave=False):
             # initialize state before student pass
             self.initializer_before_student()
 
@@ -140,12 +136,8 @@ class Simulation:
         Plot answer correctness as heatmap (students X items)
         """
         assert isinstance(self.log, pd.DataFrame)
-        pivoted_log = self.log[["student_id", "item_id", "solved"]].pivot(
-            index="student_id", columns="item_id"
-        )
-        palette = sns.color_palette(
-            [sns.xkcd_rgb["pale red"], sns.xkcd_rgb["medium green"]]
-        )
+        pivoted_log = self.log[["student_id", "item_id", "solved"]].pivot(index="student_id", columns="item_id")
+        palette = sns.color_palette([sns.xkcd_rgb["pale red"], sns.xkcd_rgb["medium green"]])
         ax = sns.heatmap(data=pivoted_log, mask=pivoted_log.isnull(), cmap=palette)
         ax.set_facecolor("black")
         ax.set_title(f"Attempts heatmap -- {self.scenario_name}")
@@ -225,9 +217,7 @@ class Simulation:
         base_path = f"data/{self.scenario_name}/"
         if not os.path.exists(base_path):
             os.makedirs(base_path)
-        self.log[["student_id", "item_id", "solved", "cheating"]].to_csv(
-            base_path + "log.csv", index=False
-        )
+        self.log[["student_id", "item_id", "solved", "cheating"]].to_csv(base_path + "log.csv", index=False)
         self.export_q_matrix(base_path + "q_matrix.csv")
         self.export_params(base_path + "params.csv")
         with open(f"{base_path}/setting.json", "w") as f:
@@ -249,37 +239,23 @@ class Simulation:
         self.q_matrix = np.array(self.setting["q_matrix"])
         concept_count: int = self.q_matrix.shape[1]
 
-        alpha_distribution: Callable[..., np.ndarray] = self.setting[
-            "alpha_distribution"
-        ]
+        alpha_distribution: Callable[..., np.ndarray] = self.setting["alpha_distribution"]
         beta_distribution: Callable[..., np.ndarray] = self.setting["beta_distribution"]
-        gamma_distribution: Callable[..., np.ndarray] = self.setting[
-            "gamma_distribution"
-        ]
+        gamma_distribution: Callable[..., np.ndarray] = self.setting["gamma_distribution"]
 
         self._set_seed()
-        self.beta = beta_distribution(
-            concept_count, **self.setting["beta_distribution_kwargs"]
-        )
+        self.beta = beta_distribution(concept_count, **self.setting["beta_distribution_kwargs"])
         self._set_seed()
-        self.gamma = gamma_distribution(
-            concept_count, **self.setting["gamma_distribution_kwargs"]
-        )
+        self.gamma = gamma_distribution(concept_count, **self.setting["gamma_distribution_kwargs"])
         assert all(self.gamma >= 0)
         self._set_seed()
-        self.alpha = alpha_distribution(
-            student_count, **self.setting["alpha_distribution_kwargs"]
-        )
+        self.alpha = alpha_distribution(student_count, **self.setting["alpha_distribution_kwargs"])
 
         self.students = [
-            Student(student_id, skill, np.full(concept_count, 0))
-            for student_id, skill in enumerate(self.alpha)
+            Student(student_id, skill, np.full(concept_count, 0)) for student_id, skill in enumerate(self.alpha)
         ]
 
-        self.items = [
-            Item(item_id, concept_mapping)
-            for item_id, concept_mapping in enumerate(self.q_matrix)
-        ]
+        self.items = [Item(item_id, concept_mapping) for item_id, concept_mapping in enumerate(self.q_matrix)]
 
         # for debug
         # pd.DataFrame(skills).plot(kind='hist', title='alpha')
@@ -326,9 +302,7 @@ class Simulation:
         the beginning where all estimates are the same).
         """
         random.shuffle(self.available_items)
-        self.available_items = sorted(
-            self.available_items, key=lambda item: item.estimated_b
-        )
+        self.available_items = sorted(self.available_items, key=lambda item: item.estimated_b)
 
     def epsilon(self) -> None:
         """
@@ -351,9 +325,7 @@ class Simulation:
         """
         Update remaining student solving time
         """
-        self.remaining_solve_time = self.setting["remaining_solve_time"](
-            self.true_b["true_b"]  # type: ignore
-        )
+        self.remaining_solve_time = self.setting["remaining_solve_time"](self.true_b["true_b"])  # type: ignore
 
     def set_remaining_items(self) -> None:
         """
@@ -377,18 +349,14 @@ class Simulation:
         # is student cheating right now
         self.active_student.cheating = False
         # set if student will eventually cheat
-        self.active_student.is_cheater = (
-            random.random() < self.setting["cheating_prevalence"]
-        )
+        self.active_student.is_cheater = random.random() < self.setting["cheating_prevalence"]
         # for compromised items
         # if self.active_student.is_cheater:
         #     self.active_student.cheating = True
 
         # for switch
         # set when student starts cheating
-        self.active_student.items_left_when_starts_cheating = random.randint(
-            1, len(self.items)
-        )
+        self.active_student.items_left_when_starts_cheating = random.randint(1, len(self.items))
 
         # for switch and back only
         # # set when student stops cheating
@@ -408,9 +376,7 @@ class Simulation:
         There can be multiple reasons to stop solving from no unsolved items
         left to expended solving time budget.
         """
-        return self._chain_executor_cumulative(
-            self.setting.get("practice_terminator_chain", ())
-        )
+        return self._chain_executor_cumulative(self.setting.get("practice_terminator_chain", ()))
 
     def available_item(self, *args: Any) -> bool:
         """
@@ -460,9 +426,7 @@ class Simulation:
         """
         Select the next item for student to solve
         """
-        self.active_item = self._chain_executor_cumulative(
-            self.setting.get("item_selector_chain", ())
-        )
+        self.active_item = self._chain_executor_cumulative(self.setting.get("item_selector_chain", ()))
         assert self.active_item is not None
         return self.active_item
 
@@ -472,9 +436,7 @@ class Simulation:
 
     def random_item(self, *args: Any) -> Item:
         assert self.available_items is not None
-        return self.available_items.pop(
-            random.randint(0, len(self.available_items) - 1)
-        )
+        return self.available_items.pop(random.randint(0, len(self.available_items) - 1))
 
     def random_from_window(self, *args: Any) -> Item:
         assert self.available_items is not None
@@ -482,9 +444,7 @@ class Simulation:
         return self.available_items.pop(random.randint(0, window_size - 1))
 
     def first_item_random_skip(self, *args: Any) -> Optional[Item]:
-        while (
-            np.random.rand() < self.setting["skip_probability"] and self.available_items
-        ):
+        while np.random.rand() < self.setting["skip_probability"] and self.available_items:
             self.available_items.pop(0)
         if not self.available_items:
             return None
@@ -560,9 +520,7 @@ class Simulation:
         student = self.active_student
         item = self.active_item
         # compute exponents
-        xs = (
-            self.active_student.skill + self.beta + (self.gamma * student.opportunities)
-        )
+        xs = self.active_student.skill + self.beta + (self.gamma * student.opportunities)
         present_concepts = item.concepts != 0
         # take only concepts that are required to solve item
         xs = xs[present_concepts]
@@ -616,9 +574,7 @@ class Simulation:
         """Modify the state if a student was cheating"""
         assert self.active_student is not None
         assert self.active_item is not None
-        if self.active_student.cheating and (
-            self.active_item.id in self.setting["compromised_items"]
-        ):
+        if self.active_student.cheating and (self.active_item.id in self.setting["compromised_items"]):
             self.solved = True
 
     """
@@ -648,9 +604,7 @@ class Simulation:
     def step_learning(self) -> None:
         """Update student skill"""
         assert self.active_student is not None
-        if (not self.active_student.has_learned) and random.random() < self.setting[
-            "learn_prob"
-        ]:
+        if (not self.active_student.has_learned) and random.random() < self.setting["learn_prob"]:
             max_gain = self.setting["max_gain"]
             self.active_student.skill += max_gain
             self.active_student.has_learned = True
@@ -662,19 +616,15 @@ class Simulation:
         if self.active_student.skill < max_gain:
             base = self.setting["learning_period"]
             if self.active_student.solved_items < base:
-                skill_increment = max_gain * log(
-                    1 / self.active_student.solved_items + 1, base
-                )
+                skill_increment = max_gain * log(1 / self.active_student.solved_items + 1, base)
                 self.active_student.skill += skill_increment
 
     def switch_cheater_state(self) -> None:
         """Update student cheating state"""
         assert self.active_student is not None
         assert self.available_items is not None
-        if (
-            self.active_student.is_cheater
-            and self.active_student.items_left_when_starts_cheating
-            >= len(self.available_items)
+        if self.active_student.is_cheater and self.active_student.items_left_when_starts_cheating >= len(
+            self.available_items
         ):
             self.active_student.cheating = True
 
@@ -740,9 +690,7 @@ class Simulation:
                     "solve_time",
                 ],
             )
-        for item, estimate in zip(
-            self.items, df.groupby("item_id")["solve_time"].mean()[0:]
-        ):
+        for item, estimate in zip(self.items, df.groupby("item_id")["solve_time"].mean()[0:]):
             item.estimated_b = estimate
 
     def get_true_difficulty_params(self) -> tuple[float, float]:
@@ -750,9 +698,7 @@ class Simulation:
 
     def get_estimated_difficulty_params(self) -> tuple[float, float]:
         assert isinstance(self.log, pd.DataFrame)
-        estimated_difficulty_params = self.log.groupby("item_id")[
-            "solve_time"
-        ].describe()["mean"]
+        estimated_difficulty_params = self.log.groupby("item_id")["solve_time"].describe()["mean"]
         return estimated_difficulty_params.mean(), estimated_difficulty_params.std()
 
 
@@ -804,9 +750,7 @@ def plot_mean_order_convergence(
 ):
     """Plot convergence of item difficulty estimates"""
     assert scenarios
-    ideal_order = list(
-        full_log.groupby("item_id")["item_true_difficulty"].max().sort_values().index
-    )
+    ideal_order = list(full_log.groupby("item_id")["item_true_difficulty"].max().sort_values().index)
 
     correlations = [
         (
