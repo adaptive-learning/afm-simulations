@@ -17,14 +17,15 @@ def clean(c):
 @task
 def clean_results(c):
     analysis_root = project_root / "src/afm_simulations/analysis"
-    results_directories = [
-        analysis_root / "cache",
-        analysis_root / "data",
-        analysis_root / "fig",
-    ]
-    for directory in results_directories:
-        if directory.exists():
-            shutil.rmtree(directory)
+    for root in (project_root, analysis_root):
+        results_directories = [
+            root / "cache",
+            root / "data",
+            root / "fig",
+        ]
+        for directory in results_directories:
+            if directory.exists():
+                shutil.rmtree(directory)
 
 
 @task
