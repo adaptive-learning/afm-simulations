@@ -67,7 +67,7 @@ def load_params(path: Path) -> pd.DataFrame:
     return pd.concat(params)
 
 
-def load_scenarios_params(scenario_paths: Sequence[Path]) -> pd.DataFrame:
+def load_specific_params(scenario_paths: Sequence[Path]) -> pd.DataFrame:
     """
     Load ground truth parameters of scenarios
 

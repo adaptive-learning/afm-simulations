@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import seaborn as sns  # type: ignore
 
-from afm_simulations.afm.common import fit_all_scenarios, load_scenarios_params
+from afm_simulations.afm.common import fit_all_scenarios, load_specific_params
 from afm_simulations.simulations.common import run_simulation
 
 matplotlib.use("agg")
@@ -109,5 +109,5 @@ if __name__ == "__main__":
     )
 
     fit_all_scenarios(relevant_scenarios)
-    params_df = load_scenarios_params(relevant_scenarios)
+    params_df = load_specific_params(relevant_scenarios)
     analyze_alpha_distributions(params_df)
