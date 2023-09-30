@@ -5,7 +5,6 @@ import matplotlib
 import matplotlib.pyplot as plt
 import pandas as pd
 import seaborn as sns
-
 from afm_tf2 import common
 
 matplotlib.use("agg")
@@ -166,7 +165,10 @@ def plot_hist(params, name, scenario=None, tag=None, separate_folds=False):
     if scenario is not None:
         plt.savefig(f"fig/{scenario}/{name}_dist.svg")
     else:
-        plt.savefig(f"fig/cheating_{name}_dist{'_' + tag if tag else ''}.svg", bbox_inches="tight")
+        plt.savefig(
+            f"fig/cheating_{name}_dist{'_' + tag if tag else ''}.svg",
+            bbox_inches="tight",
+        )
     # plt.show()
     plt.clf()
 
