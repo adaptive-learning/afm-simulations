@@ -2,7 +2,7 @@ import json
 import logging
 import os
 from pathlib import Path
-from typing import Any, Literal, Optional
+from typing import Any, Literal, Optional, Sequence
 
 import numpy as np
 import pandas as pd
@@ -24,9 +24,7 @@ logger = logging.getLogger(__name__)
 EXPORT_PATH = "fitted_params_tf.csv"
 EXCLUDED_ITEMS = "excluded_items"
 
-SCENARIO_DEF = tuple[
-    pd.DataFrame, np.ndarray, np.ndarray, np.ndarray, np.ndarray, dict[str, Any]
-]
+SCENARIO_DEF = tuple[pd.DataFrame, np.ndarray, np.ndarray, np.ndarray, np.ndarray, dict[str, Any]]
 SCENARIO_FULL_DEF = tuple[
     pd.DataFrame,
     np.ndarray,
@@ -62,9 +60,34 @@ def load_params(path: Path) -> pd.DataFrame:
             params.append(df)
 
             if base_folder_excluded_items.exists():
-                df_ex = load_fold(
-                    base_folder, fold, scenario, fold_folder=base_folder_excluded_items
-                )
+                df_ex = load_fold(base_folder, fold, scenario, fold_folder=base_folder_excluded_items)
+                df_ex["excluded_items"] = True
+                params.append(df_ex)
+
+    return pd.concat(params)
+
+
+def load_scenarios_params(scenario_paths: Sequence[Path]) -> pd.DataFrame:
+    """
+    Load ground truth parameters of scenarios
+
+    :param scenario_paths: A collection of paths with scenario data
+    :return: A single dataframe with all scenarios
+    """
+    logger.info(f"Loading parameters from fitted scenarios in {scenario_paths}")
+    params = []
+    for base_folder in tqdm(scenario_paths, desc="loading scenarios"):
+        scenario = base_folder.name
+        Path(f"fig/{scenario}").mkdir(parents=True, exist_ok=True)
+        base_folder_excluded_items = base_folder / EXCLUDED_ITEMS
+
+        for fold in range(1, 6):
+            df = load_fold(base_folder, fold, scenario)
+            df["excluded_items"] = False
+            params.append(df)
+
+            if base_folder_excluded_items.exists():
+                df_ex = load_fold(base_folder, fold, scenario, fold_folder=base_folder_excluded_items)
                 df_ex["excluded_items"] = True
                 params.append(df_ex)
 
@@ -90,9 +113,7 @@ def load_results(path: Path) -> pd.DataFrame:
     return pd.concat(results)
 
 
-def load_fold(
-    base_folder: Path, fold: int, scenario: str, fold_folder: Optional[Path] = None
-) -> pd.DataFrame:
+def load_fold(base_folder: Path, fold: int, scenario: str, fold_folder: Optional[Path] = None) -> pd.DataFrame:
     """
     Load ground truth parameter for a single fold of a scenario simulation
 
@@ -109,16 +130,10 @@ def load_fold(
     df["scenario"] = scenario
     df["fold"] = fold
 
-    df["num_answers_cheated"] = pd.read_csv(
-        base_folder / f"fold_{fold}_cheating.csv"
-    ).iloc[0, 0]
+    df["num_answers_cheated"] = pd.read_csv(base_folder / f"fold_{fold}_cheating.csv").iloc[0, 0]
 
-    log, true_alphas, true_betas, true_gammas, q_matrix, setting = load_scenario(
-        base_folder
-    )
-    df["answers_cheated_percentage"] = (
-        df["num_answers_cheated"] / (len(log) / 5) * 100
-    ).round(1)
+    log, true_alphas, true_betas, true_gammas, q_matrix, setting = load_scenario(base_folder)
+    df["answers_cheated_percentage"] = (df["num_answers_cheated"] / (len(log) / 5) * 100).round(1)
 
     names = (
         [f"alpha{i}" for i in range(true_alphas.shape[0])]
@@ -129,13 +144,7 @@ def load_fold(
     true_params = pd.DataFrame({"name": names, "true_value": values})
     df = df.merge(true_params, on="name", how="outer")
 
-    cheater = (
-        log.groupby("student_id")["cheating"]
-        .max()
-        .sort_index()
-        .rename("cheater")
-        .astype(bool)
-    )
+    cheater = log.groupby("student_id")["cheating"].max().sort_index().rename("cheater").astype(bool)
     cheater = cheater.set_axis("alpha" + cheater.index.astype(str))
     assert len(cheater) == len(true_alphas)
     assert 0 <= max(cheater) <= 1
@@ -144,15 +153,9 @@ def load_fold(
     if "cheating_prevalence" in setting:
         df["cheating_prevalence"] = setting["cheating_prevalence"]
 
-    if (
-        "beta_distribution_kwargs" in setting
-        and "values" in setting["beta_distribution_kwargs"]
-    ):
+    if "beta_distribution_kwargs" in setting and "values" in setting["beta_distribution_kwargs"]:
         df["betas"] = str(setting["beta_distribution_kwargs"]["values"])
-    if (
-        "gamma_distribution_kwargs" in setting
-        and "values" in setting["gamma_distribution_kwargs"]
-    ):
+    if "gamma_distribution_kwargs" in setting and "values" in setting["gamma_distribution_kwargs"]:
         df["gammas"] = str(setting["gamma_distribution_kwargs"]["values"])
 
     return df
@@ -187,15 +190,11 @@ def load_scenario(
     with open(scenario_path / "setting.json", "r") as f:
         setting = json.load(f)
 
-    q_matrix = (
-        pd.read_csv(scenario_path / "q_matrix.csv").set_index("item_id").to_numpy()
-    )
+    q_matrix = pd.read_csv(scenario_path / "q_matrix.csv").set_index("item_id").to_numpy()
     return log, alphas, betas, gammas, q_matrix, setting
 
 
-def get_parameters(
-    params: pd.DataFrame, param_name: Literal["alpha", "beta", "gamma"]
-) -> np.ndarray:
+def get_parameters(params: pd.DataFrame, param_name: Literal["alpha", "beta", "gamma"]) -> np.ndarray:
     """Extract values of a single type of AFM parameter."""
     return params[params.name.str.contains(param_name)].value.values  # type: ignore
 
@@ -255,6 +254,21 @@ def fit_all_in_path(
         )
 
 
+def fit_all_scenarios(
+    scenario_paths: Sequence[Path],
+    items_to_exclude: Optional[list[int]] = None,
+    student_to_exclude: Optional[list[int]] = None,
+) -> None:
+    """Fit AFM to all scenarios in the given collection"""
+    for scenario in tqdm(scenario_paths, desc="fitting scenarios"):
+        print("Fitting", scenario.name)
+        fit_afm_on_simulated_data(
+            scenario,
+            items_to_exclude=items_to_exclude,
+            student_to_exclude=student_to_exclude,
+        )
+
+
 def fit_afm_on_simulated_data(
     base_folder: Path,
     afm_export_path: str = EXPORT_PATH,
@@ -282,9 +296,7 @@ def fit_afm_on_simulated_data(
     if student_to_exclude is None:
         student_to_exclude = list()
 
-    log, true_alphas, true_betas, true_gammas, q_matrix, setting = load_scenario(
-        base_folder
-    )
+    log, true_alphas, true_betas, true_gammas, q_matrix, setting = load_scenario(base_folder)
     if q_matrix_override is not None:
         q_matrix = q_matrix_override
 
@@ -292,15 +304,11 @@ def fit_afm_on_simulated_data(
     num_items = len(log["item_id"].unique())
     student_ids = log["student_id"].to_numpy()
     item_ids = log["item_id"].to_numpy()
-    learning_opportunities = AFM.compute_opportunities(
-        student_ids, item_ids, q_matrix, num_students=num_students
-    )
+    learning_opportunities = AFM.compute_opportunities(student_ids, item_ids, q_matrix, num_students=num_students)
 
     kf = KFold(n_splits=5, shuffle=True, random_state=42)
     all_student_ids = (
-        log["student_id"]  # type: ignore
-        .drop_duplicates()[lambda x: ~x.isin(student_to_exclude)]
-        .unique()
+        log["student_id"].drop_duplicates()[lambda x: ~x.isin(student_to_exclude)].unique()  # type: ignore
     )
 
     scenario = base_folder.parts[-1]
@@ -311,9 +319,7 @@ def fit_afm_on_simulated_data(
     for _, student_indices in kf.split(all_student_ids):
         selected_student_ids = all_student_ids[student_indices]
 
-        selected_log_indices = log["student_id"].isin(selected_student_ids) & (
-            ~log["item_id"].isin(items_to_exclude)
-        )
+        selected_log_indices = log["student_id"].isin(selected_student_ids) & (~log["item_id"].isin(items_to_exclude))
         fold_log = log[selected_log_indices]
         fold_num_observations = len(fold_log)
         fold_student_ids = fold_log["student_id"].to_numpy()
@@ -326,18 +332,12 @@ def fit_afm_on_simulated_data(
         )
 
         if items_to_exclude:
-            export_path = Path(
-                base_folder / EXCLUDED_ITEMS / (f"fold_{fold}_" + afm_export_path)
-            )
+            export_path = Path(base_folder / EXCLUDED_ITEMS / (f"fold_{fold}_" + afm_export_path))
             export_path.parent.mkdir(parents=True, exist_ok=True)
-            selected_log_indices.to_csv(
-                base_folder / EXCLUDED_ITEMS / f"fold_{fold}_indices.csv", index=False
-            )
+            selected_log_indices.to_csv(base_folder / EXCLUDED_ITEMS / f"fold_{fold}_indices.csv", index=False)
         else:
             export_path = Path(base_folder / (f"fold_{fold}_" + afm_export_path))
-            selected_log_indices.to_csv(
-                base_folder / f"fold_{fold}_indices.csv", index=False
-            )
+            selected_log_indices.to_csv(base_folder / f"fold_{fold}_indices.csv", index=False)
 
         ll, rmse, y_pred, afm = fit_afm_on_simulated_data_fold(
             num_students=num_students,
@@ -378,13 +378,9 @@ def fit_afm_on_simulated_data(
 
         fold += 1
 
-    pd.DataFrame(results, columns=["scenario", "fold", "ll", "rmse"]).to_csv(
-        base_folder / "results.csv"
-    )
+    pd.DataFrame(results, columns=["scenario", "fold", "ll", "rmse"]).to_csv(base_folder / "results.csv")
 
-    pd.concat(predictions).sort_index().join(log).to_csv(
-        base_folder / "predictions.csv"
-    )
+    pd.concat(predictions).sort_index().join(log).to_csv(base_folder / "predictions.csv")
 
 
 def get_ground_truth_afm_predictions(
