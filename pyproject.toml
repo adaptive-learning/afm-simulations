@@ -9,8 +9,8 @@ packages = [{include = "afm_simulations", from = "src"}]
 [tool.poetry.scripts]
 figure-3-2 = "afm_simulations.analysis.analyze_stability:main"
 figure-3-3 = "afm_simulations.analysis.analyze_stability:main"
-figure-4-1 = "afm_simulations.analysis.analyze_alpha_dist:main"
-figure-4-2 = "afm_simulations.analysis.analyze_beta_gamma_bars:main"
+figure-4-1 = "afm_simulations.analysis.analyze_beta_gamma_bars:main"
+figure-4-2 = "afm_simulations.analysis.analyze_alpha_dist:main"
 figure-4-3 = "afm_simulations.analysis.analyze_cheating:main"
 figure-5-3 = "afm_simulations.analysis.analyze_item_ordering_bias:main"
 figure-5-4 = "afm_simulations.analysis.analyze_item_ordering_misspecified:main"
