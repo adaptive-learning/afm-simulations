@@ -34,12 +34,12 @@
         ]
     },
     "scenarios": {
-        "debug_cheating_combined_thirds_00": {"cheating_prevalence": 0.00},
-        "debug_cheating_combined_thirds_25": {"cheating_prevalence": 0.25},
-        "debug_cheating_combined_thirds_50": {"cheating_prevalence": 0.50},
-        "debug_cheating_combined_thirds_gt_alpha_00": {"cheating_prevalence": 0.00},
-        "debug_cheating_combined_thirds_gt_alpha_25": {"cheating_prevalence": 0.25},
-        "debug_cheating_combined_thirds_gt_alpha_50": {"cheating_prevalence": 0.50}
+        "cheating_combined_thirds_00": {"cheating_prevalence": 0.00},
+        "cheating_combined_thirds_25": {"cheating_prevalence": 0.25},
+        "cheating_combined_thirds_50": {"cheating_prevalence": 0.50},
+        "cheating_combined_thirds_gt_alpha_00": {"cheating_prevalence": 0.00},
+        "cheating_combined_thirds_gt_alpha_25": {"cheating_prevalence": 0.25},
+        "cheating_combined_thirds_gt_alpha_50": {"cheating_prevalence": 0.50}
     }
 }
 

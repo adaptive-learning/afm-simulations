@@ -52,13 +52,13 @@
     ]
   },
   "scenarios": {
-    "debug_cheating_combined_0_00": {
+    "cheating_combined_0_00": {
       "cheating_prevalence": 0.00
     },
-    "debug_cheating_combined_0_25": {
+    "cheating_combined_0_25": {
       "cheating_prevalence": 0.25
     },
-    "debug_cheating_combined_0_50": {
+    "cheating_combined_0_50": {
       "cheating_prevalence": 0.50
     }
   }
