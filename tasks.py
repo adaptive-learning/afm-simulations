@@ -8,11 +8,23 @@ project_root = Path(__file__).parent
 
 @task
 def clean(c):
-    cache_directories = [".mypy_cache", "dist"]
+    cache_directories = [project_root / ".mypy_cache", project_root / "dist"]
     for directory in cache_directories:
-        directory_path = Path(directory)
-        if directory_path.exists():
-            shutil.rmtree(directory_path)
+        if directory.exists():
+            shutil.rmtree(directory)
+
+
+@task
+def clean_results(c):
+    analysis_root = project_root / "src/afm_simulations/analysis"
+    results_directories = [
+        analysis_root / "cache",
+        analysis_root / "data",
+        analysis_root / "fig",
+    ]
+    for directory in results_directories:
+        if directory.exists():
+            shutil.rmtree(directory)
 
 
 @task
@@ -32,7 +44,6 @@ def flake(c):
 
 @task
 def mypy(c):
-    print(f"mypy {project_root}")
     c.run(f"mypy {project_root}")
 
 
