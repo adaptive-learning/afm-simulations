@@ -1,4 +1,17 @@
+# Virtual environment related stuff
 venv
+
+# IDE stuff
 .idea
+
+# Python cache
 .mypy_cache
+__pycache__
+
+# Poetry stuff
 dist
+
+# Results
+src/afm_simulations/analysis/cache
+src/afm_simulations/analysis/fig
+src/afm_simulations/analysis/data
