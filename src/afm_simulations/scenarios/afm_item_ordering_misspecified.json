@@ -55,7 +55,5 @@
           "beta_distribution_kwargs": {"values": [0.5, 0]},
           "gamma_distribution_kwargs": {"values": [0.1, 0]}
         }
-    },
-    "bak": {
     }
 }
