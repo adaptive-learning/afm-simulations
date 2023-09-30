@@ -138,7 +138,7 @@ def add_scenario_metadata(df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
-if __name__ == "__main__":
+def main() -> None:
     run_simulation(
         [
             "../scenarios/afm_item_ordering_misspecified.json",
@@ -183,3 +183,7 @@ if __name__ == "__main__":
 
     params_df = load_specific_params(relevant_scenarios)
     analyze_beta_gamma(params_df)
+
+
+if __name__ == "__main__":
+    main()

@@ -175,7 +175,7 @@ def plot_learning_curves(
     print(f"Saved image to {image_name}")
 
 
-if __name__ == "__main__":
+def main() -> None:
     run_simulation(
         [
             "../scenarios/cheating_combined_thirds_simple.json",
@@ -186,3 +186,7 @@ if __name__ == "__main__":
 
     fit_all_scenarios(relevant_scenarios)
     analyze_path(Path("data/cheating_combined_thirds_50"))
+
+
+if __name__ == "__main__":
+    main()

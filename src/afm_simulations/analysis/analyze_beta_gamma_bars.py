@@ -96,7 +96,7 @@ def analyze_alpha_distributions(params_df: pd.DataFrame) -> None:
         )
 
 
-if __name__ == "__main__":
+def main() -> None:
     run_simulation(
         [
             "../scenarios/cheating_combined_0.json",
@@ -111,3 +111,7 @@ if __name__ == "__main__":
     fit_all_scenarios(relevant_scenarios)
     params_df = load_specific_params(relevant_scenarios)
     analyze_alpha_distributions(params_df)
+
+
+if __name__ == "__main__":
+    main()
