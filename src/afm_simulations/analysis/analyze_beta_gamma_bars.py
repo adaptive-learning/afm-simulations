@@ -27,7 +27,7 @@ SCENARIO_BASE_PROPER_NAMES = {
 }
 
 
-def plot_beta_gamma_bars(params, tag=None):
+def plot_beta_gamma_bars(params: pd.DataFrame, tag=None) -> None:
     relevant_params = (
         params[
             (params["name"].str.contains("beta")) | (params["name"].str.contains("gamma"))  # keep beta and gamma params
@@ -104,7 +104,7 @@ if __name__ == "__main__":
         ]
     )
 
-    relevant_scenarios = list(list(Path().glob("data/cheating_combined_thirds_[025g]*"))) + list(
+    relevant_scenarios = list(Path().glob("data/cheating_combined_thirds_[025g]*")) + list(
         Path().glob("data/cheating_combined_0*")
     )
 

@@ -28,7 +28,7 @@ SCENARIO_BASE_PROPER_NAMES = {
 }
 
 
-def plot_hist(params, name, scenario=None, tag=None, separate_folds=False):
+def plot_hist(params, name, scenario=None, tag=None, separate_folds=False) -> None:
     relevant_params = (
         params[params["name"].str.contains(name)][lambda x: x["value"] != 0]
         .drop_duplicates(subset=["name", "scenario", "value"])
@@ -160,7 +160,7 @@ if __name__ == "__main__":
         ]
     )
 
-    relevant_scenarios = list(list(Path().glob("data/cheating_combined_thirds_[025g]*"))) + list(
+    relevant_scenarios = list(Path().glob("data/cheating_combined_thirds_[025g]*")) + list(
         Path().glob("data/cheating_combined_0*")
     )
 
